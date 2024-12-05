@@ -1,7 +1,6 @@
 <div align="center">
   <img src=".img/lavender_icon.svg" width="30%" height="auto">
 </div>
-<h1 align="center">Lavender</h1>
 
 [![Release](https://img.shields.io/github/v/release/leonarudo/Lavender)](https://github.com/leonarudo/Lavender/releases/latest)
 [![Top language](https://img.shields.io/github/languages/top/leonarudo/Lavender)](https://github.com/leonarudo/Lavender/search?l=C%23)
