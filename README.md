@@ -21,5 +21,5 @@ Here are some basic resources on code style and naming conventions Lavender trys
 - [Identifier Names](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/identifier-names)
 
 ## License
-This project is licensed under the [GPL-3.0 license](LICENSE)
+This project is licensed under the [LGPL-v2.1 license](LICENSE)
  
