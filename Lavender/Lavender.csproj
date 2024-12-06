@@ -6,6 +6,7 @@
   </PropertyGroup>
 
 		<ItemGroup>
+				<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 				<PackageReference Include="UnityEngine.Modules" Version="2019.4.40">
 						<IncludeAssets>all</IncludeAssets>
 						<PrivateAssets>all</PrivateAssets>
@@ -13,21 +14,15 @@
 		</ItemGroup>
 
 		<ItemGroup>
-				<PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2"
-					PrivateAssets="all" />
+				<PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2" PrivateAssets="all" />
 
 				<Reference Include="$(DependsDir)/Assembly-CSharp.dll" Publicize="true" />
 		</ItemGroup>
 
 		<ItemGroup>
-				<PackageReference
-					Include="BepInEx.Analyzers"
-					PrivateAssets="all"
-					Version="1.*" />
+				<PackageReference Include="BepInEx.Analyzers" PrivateAssets="all" Version="1.*" />
 
-				<PackageReference
-					Include="BepInEx.Core"
-					Version="5.4.*" />
+				<PackageReference Include="BepInEx.Core" Version="5.4.*" />
 		</ItemGroup>
 
 		<Import Project="$(SolutionDir)Config.Build.user.props" />
