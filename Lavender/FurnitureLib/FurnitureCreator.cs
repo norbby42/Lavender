@@ -59,7 +59,7 @@ namespace Lavender.FurnitureLib
         /// </summary>
         /// <param name="furnitureData">Deserialized ur-furniture-name.json</param>
         /// <returns></returns>
-        public static Furniture FurnitureConfigToFurniture(FurnitureConfig furnitureData)
+        public static Furniture? FurnitureConfigToFurniture(FurnitureConfig furnitureData)
         {
             if (furnitureData == null) return null;
 
@@ -75,7 +75,7 @@ namespace Lavender.FurnitureLib
             var assetBundle = AssetBundle.LoadFromStream(fileStream);
             if (assetBundle == null)
             {
-                Debug.LogError($"[Lavender] Error while creating furniture '{furnitureData.title}': couldn't get AssetBundle at '{furnitureData.assetBundlePath}'!");
+                LavenderLog.Error($"Error while creating furniture '{furnitureData.title}': couldn't get AssetBundle at '{furnitureData.assetBundlePath}'!");
                 return null;
             }
 
@@ -85,17 +85,17 @@ namespace Lavender.FurnitureLib
 
             if (image == null)
             {
-                Debug.LogError($"[Lavender] Error while creating furniture '{furnitureData.title}': couldn't get image '{furnitureData.imageName}'!");
+                LavenderLog.Error($"Error while creating furniture '{furnitureData.title}': couldn't get image '{furnitureData.imageName}'!");
                 return null;
             }
             if (prefab == null)
             {
-                Debug.LogError($"[Lavender] Error while creating furniture '{furnitureData.title}': couldn't get prefab '{furnitureData.prefabName}'!");
+                LavenderLog.Error($"Error while creating furniture '{furnitureData.title}': couldn't get prefab '{furnitureData.prefabName}'!");
                 return null;
             }
             if (previewPrefab == null)
             {
-                Debug.LogError($"[Lavender] Error while creating furniture '{furnitureData.title}': couldn't get preview prefab '{furnitureData.previewPrefabName}'!");
+                LavenderLog.Error($"Error while creating furniture '{furnitureData.title}': couldn't get preview prefab '{furnitureData.previewPrefabName}'!");
                 return null;
             }
 
@@ -146,12 +146,12 @@ namespace Lavender.FurnitureLib
                 }
                 catch (Exception e)
                 {
-                    Debug.LogError($"[Lavender] FurnitureCreator.Create(): {e}");
+                    LavenderLog.Error($"FurnitureCreator.Create(): {e}");
                     return null;
                 }
             }
 
-            Debug.LogError($"[Lavender] FurnitureCreator.Create(): Couldn't find json_path '{json_path}'");
+            LavenderLog.Error($"FurnitureCreator.Create(): Couldn't find json_path '{json_path}'");
             return null;
         }
 

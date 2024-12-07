@@ -45,7 +45,7 @@ namespace Lavender.FurnitureLib
                     }
                     catch (Exception e)
                     {
-                        Debug.LogError(e);
+                        LavenderLog.Error(e.ToString());
                         __result = null;
                     }
 
@@ -58,7 +58,7 @@ namespace Lavender.FurnitureLib
 
         [HarmonyPatch(typeof(FurnitureShop), nameof(FurnitureShop.AddFurniture))]
         [HarmonyPrefix]
-        static bool FurnitureShop_AddFurniture_Prefix_Skip(FurnitureShop __instance,ref bool __result, Furniture furniture, int amount)
+        static bool FurnitureShop_AddFurniture_Prefix(FurnitureShop __instance,ref bool __result, Furniture furniture, int amount)
         {
             BuildingSystem.FurnitureInfo furnitureInfo = __instance.availableFurnitures.Find((BuildingSystem.FurnitureInfo f) => f.furniture.title == furniture.title);
             if (furnitureInfo == null || furnitureInfo.furniture == null)
@@ -74,6 +74,7 @@ namespace Lavender.FurnitureLib
             furnitureInfo.amount += amount;
             __result = true;
 
+            if (!BepinexPlugin.Settings.FurnitureShop_AddFurniture_Prefix_SkipOriginal.Value) return true;
             return false;
         }
 
@@ -86,7 +87,7 @@ namespace Lavender.FurnitureLib
             MethodInfo methodInfo = typeof(FurnitureShop).GetMethod("UpdateShopItems", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
             methodInfo.Invoke(__instance, new object[] { });
 
-            Debug.Log($"[Lavender] Restocking '{(__instance.title != "" ? __instance.title : "One Stop Shop")}'");
+            LavenderLog.Log($"Restocking '{(__instance.title != "" ? __instance.title : "One Stop Shop")}'");
 
             FurnitureShopName name = (__instance.title == "" ? FurnitureShopName.OneStopShop : (__instance.title == "Möbelmann Furnitures" ? FurnitureShopName.MoebelmannFurnitures : (__instance.title == "Jonasson's Shop" ? FurnitureShopName.SamuelJonasson : FurnitureShopName.None)));
 
@@ -98,6 +99,7 @@ namespace Lavender.FurnitureLib
                 }
             }
 
+            if (!BepinexPlugin.Settings.FurnitureShop_Restock_Prefix_SkipOriginal.Value) return true;
             return false;
         }
 
@@ -123,10 +125,13 @@ namespace Lavender.FurnitureLib
             {
                 __instance.availableFurnitures.Add(new BuildingSystem.FurnitureInfo(furniture, taskItem, gameObject, amount, null));
                 __instance.availableFurnitures.Sort((BuildingSystem.FurnitureInfo slot1, BuildingSystem.FurnitureInfo slot2) => slot1.furniture.name.CompareTo(slot2.furniture.name));
-                return true;
+                __result = true;
             }
             furnitureInfo.amount += amount;
-            return true;
+            __result = true;
+
+            if(!BepinexPlugin.Settings.BuildingSystem_AddFurniture_Prefix_SkipOriginal.Value) return true;
+            return false;
         }
 
         static TaskItem BSAddTaskItem(Furniture furniture, BuildingSystem.FurnitureInfo info, int amount)

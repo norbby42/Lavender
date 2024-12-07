@@ -10,10 +10,12 @@ namespace Lavender
     public class BepinexPlugin : BaseUnityPlugin
     {
         internal static ManualLogSource Log = null!;
+        internal static LavenderSettings Settings = null!;
 
         private void Awake()
         {
             Log = Logger;
+            Settings = new LavenderSettings(Config);
 
             Lavender.furnitureHandlers = new Dictionary<string, Lavender.FurnitureHandler>();
             Lavender.furnitureShopRestockHandlers = new Dictionary<string, Lavender.FurnitureShopRestockHandler>();
@@ -23,7 +25,10 @@ namespace Lavender
             SceneManager.sceneLoaded += OnSceneLoaded;
 
             Log.LogInfo($"Plugin {LCMPluginInfo.PLUGIN_NAME} version {LCMPluginInfo.PLUGIN_VERSION} is loaded!");
+            LavenderLog.Log($"{LCMPluginInfo.PLUGIN_NAME} version {LCMPluginInfo.PLUGIN_VERSION} is loaded!");
             Lavender.instance.isInitialized = true;
+
+            Settings.LogUnstableStatus();
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)

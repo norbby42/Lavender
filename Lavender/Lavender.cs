@@ -60,7 +60,7 @@ namespace Lavender
 
                 if (!method.IsStatic)
                 {
-                    Debug.LogError($"[Lavender] '{method.DeclaringType.Name}.{method.Name}' is an instance method, but furniture handler methods must be static");
+                    LavenderLog.Error($"'{method.DeclaringType.Name}.{method.Name}' is an instance method, but furniture handler methods must be static");
                     return false;
                 }
 
@@ -69,7 +69,7 @@ namespace Lavender
                 {
                     if (furnitureHandlers.ContainsKey(attribute.FurnitureTitle))
                     {
-                        Debug.LogError($"[Lavender] DuplicateHandlerException: '{method.DeclaringType}.{method.Name}' Only one handler method is allowed per furniture!");
+                        LavenderLog.Error($"DuplicateHandlerException: '{method.DeclaringType}.{method.Name}' Only one handler method is allowed per furniture!");
                         return false;
                     }
                     else
@@ -79,7 +79,7 @@ namespace Lavender
                 }
                 else
                 {
-                    Debug.LogError($"[Lavender] InvalidHandlerSignatureException: '{method.DeclaringType}.{method.Name}' doesn't match any acceptable furniture handler method signatures! Furniture handler methods should have a 'Furniture' parameter and should return 'Furniture'.");
+                    LavenderLog.Error($"InvalidHandlerSignatureException: '{method.DeclaringType}.{method.Name}' doesn't match any acceptable furniture handler method signatures! Furniture handler methods should have a 'Furniture' parameter and should return 'Furniture'.");
                     return false;
                 }
             }
@@ -102,7 +102,7 @@ namespace Lavender
 
                 if (!method.IsStatic)
                 {
-                    Debug.LogError($"[Lavender] '{method.DeclaringType.Name}.{method.Name}' is an instance method, but furniture shop restock handler methods must be static");
+                    LavenderLog.Error($"'{method.DeclaringType.Name}.{method.Name}' is an instance method, but furniture shop restock handler methods must be static");
                     return false;
                 }
 
@@ -111,7 +111,7 @@ namespace Lavender
                 {
                     if (furnitureShopRestockHandlers.ContainsKey(attribute.HandlerUID))
                     {
-                        Debug.LogError($"[Lavender] DuplicateHandlerException: '{method.DeclaringType}.{method.Name}' Only one handler method is allowed per UID!");
+                        LavenderLog.Error($"DuplicateHandlerException: '{method.DeclaringType}.{method.Name}' Only one handler method is allowed per UID!");
                         return false;
                     }
                     else
@@ -121,7 +121,7 @@ namespace Lavender
                 }
                 else
                 {
-                    Debug.LogError($"[Lavender] InvalidHandlerSignatureException: '{method.DeclaringType}.{method.Name}' doesn't match any acceptable furniture shop restock handler method signatures! Furniture handler methods should have a 'FurnitureShopName' parameter and should return 'List<BuildingSystem.FurnitureInfo>'.");
+                    LavenderLog.Error($"InvalidHandlerSignatureException: '{method.DeclaringType}.{method.Name}' doesn't match any acceptable furniture shop restock handler method signatures! Furniture handler methods should have a 'FurnitureShopName' parameter and should return 'List<BuildingSystem.FurnitureInfo>'.");
                     return false;
                 }
             }
