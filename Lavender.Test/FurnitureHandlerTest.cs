@@ -10,7 +10,7 @@ namespace Lavender.Test
 {
     public class FurnitureHandlerTest
     {
-        [FurnitureHandlerAttribute("Lavender Box")]
+        [FurnitureHandlerAttribute("OSML Box")]
         public static Furniture osmlBoxHandler(Furniture furniture)
         {
             Debug.Log($"[{furniture.title}] Hello!");

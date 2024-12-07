@@ -24,15 +24,10 @@ namespace Lavender.FurnitureLib
 
                     try
                     {
-                        if (File.Exists(path))
+                        Furniture f = FurnitureCreator.Create(path);
+
+                        if (f != null)
                         {
-                            string rawFurnitureConfig = File.ReadAllText(path);
-
-                            FurnitureConfig furnitureConfig = JsonConvert.DeserializeObject<FurnitureConfig>(rawFurnitureConfig);
-                            furnitureConfig.assetBundlePath = path.Substring(0, path.Length - Path.GetFileName(path).Length) + furnitureConfig.assetBundlePath;
-                            Furniture f = FurnitureCreator.FurnitureConfigToFurniture(furnitureConfig);
-                            f.addressableAssetPath = $"Lavender<#>{path}";
-
                             if (Lavender.furnitureHandlers.TryGetValue(f.title, out Lavender.FurnitureHandler handler))
                             {
                                 f = handler.Invoke(f);
@@ -40,8 +35,6 @@ namespace Lavender.FurnitureLib
 
                             __result = f;
                         }
-
-                        __result = null;
                     }
                     catch (Exception e)
                     {
