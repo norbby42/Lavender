@@ -21,10 +21,7 @@ namespace Lavender.Test
                 string path = Path.Combine(Assembly.GetExecutingAssembly().Location.Substring(0, Assembly.GetExecutingAssembly().Location.Length - 17), "osml_box.json");
 
                 Furniture? f = FurnitureCreator.Create(path);
-                if (f != null)
-                {
-                    f.GiveItem();
-                }
+                if (f != null) f.GiveItem();
             }
         }
     }

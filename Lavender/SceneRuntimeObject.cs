@@ -25,15 +25,18 @@ namespace Lavender
             yield return new WaitForSeconds(_updateWaitTime);
 
             Lavender.instance.firstUpdateFinished = true;
-            Debug.Log("[Lavender] SceneRuntimeObject finished first Update!");
+            LavenderLog.Log("SceneRuntimeObject finished first Update!");
 
-            Notifications.instance.CreateNotification("OSML", "SceneRuntimeObject finished first Update!", false);
+            if(BepinexPlugin.Settings.SceneRuntimeObjectNotification.Value) 
+            { 
+                Notifications.instance.CreateNotification("Lavender", "SceneRuntimeObject finished first Update!", false); 
+            }
         }
 
         void OnDisable()
         {
             Lavender.instance.firstUpdateFinished = false;
-            Debug.Log("[Lavender] SceneRuntimeObject disabled!");
+            LavenderLog.Log("SceneRuntimeObject disabled!");
         }
     }
 }

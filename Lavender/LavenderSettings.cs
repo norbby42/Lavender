@@ -5,7 +5,8 @@ namespace Lavender
 {
     public class LavenderSettings(ConfigFile config)
     {
-        public ConfigEntry<bool> DetailedLog = config.Bind<bool>("Log", "DetailedLog", false, "Detailed Log Output");
+        public ConfigEntry<bool> DetailedLog = config.Bind<bool>("Log", "DetailedLog", false, "Enable Detailed Log Output");
+        public ConfigEntry<bool> SceneRuntimeObjectNotification = config.Bind<bool>("Log", "SceneRuntimeObjectNotification", true, "Enable SceneRuntimeObject Notification");
 
         #region UNSTABLE PATCH SETTINGS
 
