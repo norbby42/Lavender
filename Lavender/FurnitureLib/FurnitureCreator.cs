@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -118,6 +119,60 @@ namespace Lavender.FurnitureLib
             );
 
             return furniture;
+        }
+
+        /// <summary>
+        /// Creats a Furniture from the given path to the FurnitureConfig json
+        /// </summary>
+        /// <param name="json_path">The path to the json</param>
+        /// <returns></returns>
+        public static Furniture? Create(string json_path)
+        {
+            if(File.Exists(json_path))
+            {
+                try
+                {
+                    string rawFurnitureConfig = File.ReadAllText(json_path);
+
+                    FurnitureConfig? furnitureConfig = JsonConvert.DeserializeObject<FurnitureConfig>(rawFurnitureConfig);
+                    if (furnitureConfig != null)
+                    {
+                        furnitureConfig.assetBundlePath = json_path.Substring(0, json_path.Length - Path.GetFileName(json_path).Length) + furnitureConfig.assetBundlePath;
+                        Furniture f = FurnitureCreator.FurnitureConfigToFurniture(furnitureConfig);
+                        f.addressableAssetPath = $"Lavender<#>{json_path}";
+
+                        return f;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"[Lavender] FurnitureCreator.Create(): {e}");
+                    return null;
+                }
+            }
+
+            Debug.LogError($"[Lavender] FurnitureCreator.Create(): Couldn't find json_path '{json_path}'");
+            return null;
+        }
+
+        /// <summary>
+        /// Creates an BuildingSystem.FurnitureInfo for the FurnitureShopRestockHandler
+        /// </summary>
+        /// <param name="json_path">The path to the furniture json</param>
+        /// <param name="amount">The amount of the furniture you want to add to the shop</param>
+        /// <returns></returns>
+        public static BuildingSystem.FurnitureInfo? CreateShopFurniture(string json_path, int amount = 1)
+        {
+            Furniture? f = Create(json_path);
+            if (f == null) return null;
+
+            TaskItem taskItem = (TaskItem)ScriptableObject.CreateInstance(typeof(TaskItem));
+            taskItem.itemName = f.title;
+            taskItem.itemDetails = f.details;
+            taskItem.image = f.image;
+            taskItem.itemType = TaskItem.Type.Furnitures;
+
+            return new BuildingSystem.FurnitureInfo(f, taskItem, null, amount, null);
         }
     }
 }
