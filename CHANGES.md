@@ -5,8 +5,12 @@
   - added Create
   - added CreateShopFurniture
 - added Furniture Config
+- added FurnitureAssetData
 - added Furniture Handler -> Callback when Furniture gets loaded, which allows us to add custum scripts to the prefabs
 - added Furniture Shop Restock Handler -> sell your furnitures!
+## Runtime Importer
+- added FastObjImporter
+- added ImageLoader
 ## Patches
 - added SavableScriptableObject.LoadFromPath Prefix
 - added FurnitureShop.AddFurniture Prefix -> always skips remaining prefixes and original

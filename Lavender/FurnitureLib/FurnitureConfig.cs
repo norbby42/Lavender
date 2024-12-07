@@ -27,6 +27,7 @@ namespace Lavender.FurnitureLib
 
         /// <summary>
         /// The location of the AssetBundle, which contains the image,prefab and preview prefab, relative to the .json path
+        /// <br>Or the location of the FurnitureAssetData .json</br>
         /// </summary>
         public string assetBundlePath;
         /// <summary>
