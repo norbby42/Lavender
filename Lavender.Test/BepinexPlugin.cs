@@ -1,9 +1,8 @@
-﻿using System;
-using BepInEx;
+﻿using BepInEx;
 using BepInEx.Logging;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+using Lavender.FurnitureLib;
+using System.Reflection;
+using System.IO;
 
 namespace Lavender.Test
 {
@@ -16,7 +15,7 @@ namespace Lavender.Test
         {
             Log = Logger;
 
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            SaveController.LoadingDone += onLoadingDone;
 
             Lavender.AddFurnitureHandlers(typeof(FurnitureHandlerTest));
             Lavender.AddFurnitureShopRestockHandlers(typeof(FurnitureHandlerTest));
@@ -24,14 +23,13 @@ namespace Lavender.Test
             Log.LogInfo($"Plugin {LCMPluginInfo.PLUGIN_NAME} version {LCMPluginInfo.PLUGIN_VERSION} is loaded!");
         }
 
-        private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        private void onLoadingDone()
         {
-            if (!Lavender.instance.isInitialized) return;
+            // !Only add Furniture after Loading is done
+            string path = Path.Combine(Assembly.GetExecutingAssembly().Location.Substring(0, Assembly.GetExecutingAssembly().Location.Length - 17), "osml_box.json");
 
-            if (scene.buildIndex != 0)
-            {
-                GameObject ft = new GameObject("FurnitureTest", typeof(FurnitureTest));
-            }
+            Furniture? f = FurnitureCreator.Create(path);
+            if (f != null) f.GiveItem();
         }
     }
 }

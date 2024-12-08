@@ -23,6 +23,7 @@ namespace Lavender
             new Lavender();
 
             SceneManager.sceneLoaded += OnSceneLoaded;
+            SaveController.LoadingDone += onLoadingDone;
 
             Log.LogInfo($"Plugin {LCMPluginInfo.PLUGIN_NAME} version {LCMPluginInfo.PLUGIN_VERSION} is loaded!");
             LavenderLog.Log($"{LCMPluginInfo.PLUGIN_NAME} version {LCMPluginInfo.PLUGIN_VERSION} is loaded!");
@@ -38,11 +39,17 @@ namespace Lavender
             Debug.Log($"Scene: {scene.buildIndex}, {scene.name} loaded!");
 
             Lavender.instance.lastLoadedScene = scene.buildIndex;
-            Lavender.instance.firstUpdateFinished = false;
+            Lavender.instance.LoadingDone = false;
+        }
 
-            if (scene.buildIndex != 0)
+        private void onLoadingDone()
+        {
+            Lavender.instance.LoadingDone = true;
+            LavenderLog.Log("Scene Loading Done!");
+
+            if (BepinexPlugin.Settings.SceneRuntimeObjectNotification.Value)
             {
-                GameObject sro = new GameObject("SceneRuntimeObject", typeof(SceneRuntimeObject));
+                Notifications.instance.CreateNotification("Lavender", "Scene Loading Done!", false);
             }
         }
     }

@@ -23,9 +23,9 @@ namespace Lavender
         public int lastLoadedScene = 0;
 
         /// <summary>
-        /// You want to execute your mod logic after this (firstUpdateFinished = true) to make sure that all game logic is already initialized!
+        /// You want to execute your mod logic only when LoadingDone = true to make sure that all game logic is already initialized!
         /// </summary>
-        public bool firstUpdateFinished;
+        public bool LoadingDone;
 
         public Lavender()
         {
