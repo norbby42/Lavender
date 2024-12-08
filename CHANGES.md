@@ -1,4 +1,6 @@
 # Upcoming
+
+# v0.1.0 (December 8th 2024)
 ## Furniture
 - added FurnitureCreator
   - added FurnitureConfigToFurniture
