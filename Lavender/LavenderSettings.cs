@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using BepInEx.Configuration;
 
 namespace Lavender
@@ -6,7 +7,7 @@ namespace Lavender
     public class LavenderSettings(ConfigFile config)
     {
         public ConfigEntry<bool> DetailedLog = config.Bind<bool>("Log", "DetailedLog", false, "Enable Detailed Log Output");
-        public ConfigEntry<bool> SceneRuntimeObjectNotification = config.Bind<bool>("Log", "SceneRuntimeObjectNotification", true, "Enable SceneRuntimeObject Notification");
+        public ConfigEntry<bool> SceneLoadingDoneNotification = config.Bind<bool>("Log", "SceneLoadingDoneNotification", true, "Enable 'Scene Loading Done' Notification");
 
         #region UNSTABLE PATCH SETTINGS
 

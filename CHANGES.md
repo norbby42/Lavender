@@ -18,7 +18,7 @@
 - added BuildingSystem.AddFurniture Prefix -> always skips remaining prefixes and original
 ## Settings
 - added DetailedLog
-- added SceneRuntimeObjectNotification
+- added SceneLoadingDoneNotification
 - added FurnitureShop_AddFurniture_Prefix_SkipOriginal
 - added FurnitureShop_Restock_Prefix_SkipOriginal
 - added BuildingSystem_AddFurniture_Prefix_SkipOriginal

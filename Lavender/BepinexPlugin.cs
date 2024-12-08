@@ -47,7 +47,7 @@ namespace Lavender
             Lavender.instance.LoadingDone = true;
             LavenderLog.Log("Scene Loading Done!");
 
-            if (BepinexPlugin.Settings.SceneRuntimeObjectNotification.Value)
+            if (BepinexPlugin.Settings.SceneLoadingDoneNotification.Value)
             {
                 Notifications.instance.CreateNotification("Lavender", "Scene Loading Done!", false);
             }
