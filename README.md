@@ -10,8 +10,17 @@
 
 **Lavender** is a powerful and user-friendly library mod designed to simplify the process of modding the game [Obenseuer](https://store.steampowered.com/app/951240/Obenseuer/) using BepInEx as mod loader.
  
-## Features
-To do ;)
+## Features:
+- Furniture
+  - Assets either via AssetBundles or OBJ & JPG/PNG
+  - Custom Scripts
+  - add to Shops
+### Additional:
+- Runtime OBJ Importer
+- easy PNG/JPG Loader
+
+### Upcoming:
+[CHANGES.md](./CHANGES.md#upcoming)
  
 ## Contributing
 Contributions are welcome! Whether you're fixing bugs, adding new features, or improving documentation, your help is appreciated. To contribute, please fork the repository and submit a pull request. For major changes, please open an issue first to discuss what you would like to change.
