@@ -2,14 +2,18 @@
   <img src=".img/lavender_icon.svg" width="50%" height="auto">
 </div>
 
-[![Release](https://img.shields.io/github/v/release/leonarudo/Lavender)](https://github.com/leonarudo/Lavender/releases/latest)
+[![Release](https://img.shields.io/github/v/release/leonarudo/Lavender?color=green)](https://github.com/leonarudo/Lavender/releases/latest)
+[![NuGet Version](https://img.shields.io/nuget/v/Lavender?color=green)](https://www.nuget.org/packages/Lavender/)
 [![Top language](https://img.shields.io/github/languages/top/leonarudo/Lavender)](https://github.com/leonarudo/Lavender/search?l=C%23)
 [![License](https://img.shields.io/github/license/leonarudo/Lavender)](https://github.com/leonarudo/Lavender/blob/main/LICENSE)
 [![Issues](https://img.shields.io/github/issues/leonarudo/Lavender)](https://github.com/leonarudo/Lavender/issues)
 [![Pull requests](https://img.shields.io/github/issues-pr/leonarudo/Lavender)](https://github.com/leonarudo/Lavender/pulls)
 
 **Lavender** is a powerful and user-friendly library mod designed to simplify the process of modding the game [Obenseuer](https://store.steampowered.com/app/951240/Obenseuer/) using BepInEx as mod loader.
- 
+## Nuget
+- **.Net CLI:** ``dotnet add package Lavender --version 0.1.0``
+- **PackageReference:** ``<PackageReference Include="Lavender" Version="0.1.0" />``
+
 ## Features:
 - Furniture
   - Assets either via AssetBundles or OBJ & JPG/PNG
