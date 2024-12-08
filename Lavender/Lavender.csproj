@@ -6,7 +6,17 @@
     <Version>0.1.0</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/leonarudo/Lavender</RepositoryUrl>
+    <Description>Lavender is a powerful and user-friendly library mod designed to simplify the process of modding the game Obenseuer using BepInEx as mod loader.</Description>
+    <PackageReadmeFile></PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 		<ItemGroup>
 				<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
