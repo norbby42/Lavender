@@ -185,6 +185,8 @@ namespace Lavender.FurnitureLib
                     LavenderLog.Error($"Error while creating furniture '{furnitureData.title}': couldn't get preview prefab '{furnitureData.previewPrefabName}'!");
                     return null;
                 }
+
+                assetBundle.Unload(false);
             }
 
             // Creates the Furniture

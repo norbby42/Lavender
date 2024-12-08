@@ -98,12 +98,12 @@ namespace Lavender.FurnitureLib
 
         [HarmonyPatch(typeof(BuildingSystem), nameof(BuildingSystem.AddFurniture))]
         [HarmonyPrefix]
-        static bool BuildingSystem_AddFurniture_Prefix(BuildingSystem __instance, ref bool __result, Furniture furniture, GameObject gameObject, out GameObject savedGameObject, int amount)
+        static bool BuildingSystem_AddFurniture_Prefix(BuildingSystem __instance, ref bool __result, Furniture furniture, GameObject gameObject, out GameObject savedGameObject, int amount = 1)
         {
             BuildingSystem.FurnitureInfo furnitureInfo = __instance.availableFurnitures.Find((BuildingSystem.FurnitureInfo f) => f.furniture.title == furniture.title && f.gameObject == null);
             if (gameObject != null)
             {
-                gameObject.transform.SetParent((__instance.inventoryLocation != null) ? __instance.inventoryLocation : __instance.transform);
+                gameObject.transform.SetParent((__instance.inventoryLocation != null) ? __instance.inventoryLocation : __instance.gameObject.transform);
                 gameObject.transform.localPosition = Vector3.zero;
                 if (!__instance.HasSaveableContent(gameObject))
                 {
@@ -113,38 +113,19 @@ namespace Lavender.FurnitureLib
             }
             savedGameObject = gameObject;
             BuildingSystem.FurnitureInfo info = __instance.availableFurnitures.Find((BuildingSystem.FurnitureInfo f) => f.furniture.title == furniture.title);
-            TaskItem taskItem = BSAddTaskItem(furniture, info, amount);
+            TaskItem taskItem = __instance.AddTaskItem(furniture, info, amount);
             if (furnitureInfo == null || furnitureInfo.furniture == null || gameObject != null)
             {
                 __instance.availableFurnitures.Add(new BuildingSystem.FurnitureInfo(furniture, taskItem, gameObject, amount, null));
                 __instance.availableFurnitures.Sort((BuildingSystem.FurnitureInfo slot1, BuildingSystem.FurnitureInfo slot2) => slot1.furniture.name.CompareTo(slot2.furniture.name));
                 __result = true;
+
+                return !BepinexPlugin.Settings.BuildingSystem_AddFurniture_Prefix_SkipOriginal.Value;
             }
             furnitureInfo.amount += amount;
             __result = true;
 
-            if(!BepinexPlugin.Settings.BuildingSystem_AddFurniture_Prefix_SkipOriginal.Value) return true;
-            return false;
-        }
-
-        static TaskItem BSAddTaskItem(Furniture furniture, BuildingSystem.FurnitureInfo info, int amount)
-        {
-            TaskItem taskItem;
-            if (info == null || info.furniture == null)
-            {
-                taskItem = (TaskItem)ScriptableObject.CreateInstance(typeof(TaskItem));
-                taskItem.itemName = furniture.title;
-                taskItem.itemDetails = furniture.details;
-                taskItem.image = furniture.image;
-                taskItem.itemType = TaskItem.Type.Furnitures;
-                TaskItemsManager.instance.AddTaskItem(taskItem, amount, false, null, false);
-            }
-            else
-            {
-                taskItem = info.taskItem;
-                TaskItemsManager.instance.AddTaskItem(info.taskItem, amount, false, null, false);
-            }
-            return taskItem;
+            return !BepinexPlugin.Settings.BuildingSystem_AddFurniture_Prefix_SkipOriginal.Value;
         }
     }
 }
