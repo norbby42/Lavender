@@ -21,6 +21,8 @@ namespace Lavender
             Lavender.furnitureShopRestockHandlers = new Dictionary<string, Lavender.FurnitureShopRestockHandler>();
             Lavender.createdFurniture = new List<Furniture>();
 
+            Lavender.customItemDatabase = new List<Item>();
+
             new Lavender();
 
             SceneManager.sceneLoaded += OnSceneLoaded;

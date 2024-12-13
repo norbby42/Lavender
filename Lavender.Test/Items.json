@@ -1,0 +1,50 @@
+[
+	{
+		"ID": 101,
+		"Title": "AssetBundle Item Test",
+		"Categories": [
+			"Test"
+		],
+		"Value": 1,
+		"Description": "Test! 1,2,3...",
+		"Stackable": 99,
+		"Appearance": {
+			"Material": "",
+			"SpritePath": "osml_box#AB<osml_box_img>",
+			"ColorValue": "",
+			"PrefabPath": "osml_box#AB<osml_box_pre>",
+			"PrefabPathMany": ""
+		},
+		"Actions": [],
+		"Attachments": {
+			"Name": "",
+			"Attachment1": "none",
+			"Attachment2": "none"
+		},
+		"Meta": []
+	},
+	{
+		"ID": 102,
+		"Title": "OBJ Item Test",
+		"Categories": [
+			"Test"
+		],
+		"Value": 1,
+		"Description": "Test! 1,2,3...",
+		"Stackable": 99,
+		"Appearance": {
+			"Material": "",
+			"SpritePath": "item_test_img.png",
+			"ColorValue": "",
+			"PrefabPath": "obj_item_test.obj",
+			"PrefabPathMany": ""
+		},
+		"Actions": [],
+		"Attachments": {
+			"Name": "",
+			"Attachment1": "none",
+			"Attachment2": "none"
+		},
+		"Meta": []
+	}
+]

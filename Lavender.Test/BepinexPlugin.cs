@@ -20,6 +20,10 @@ namespace Lavender.Test
             Lavender.AddFurnitureHandlers(typeof(FurnitureHandlerTest));
             Lavender.AddFurnitureShopRestockHandlers(typeof(FurnitureHandlerTest));
 
+            // Item test
+            string path = Path.Combine(Assembly.GetExecutingAssembly().Location.Substring(0, Assembly.GetExecutingAssembly().Location.Length - 17), "Items.json");
+            Lavender.AddCustomItemsFromJson(path, LCMPluginInfo.PLUGIN_NAME);
+
             Log.LogInfo($"Plugin {LCMPluginInfo.PLUGIN_NAME} version {LCMPluginInfo.PLUGIN_VERSION} is loaded!");
         }
 

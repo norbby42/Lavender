@@ -3,6 +3,16 @@
 - added createdFurniture List
   - added GetFurnitureByTitel
   - added CreateShopFurniture (int amount, string furniture_titel)
+## Item
+- added customItemDatabase
+  - added AddCustomItem
+  - added AddCustomItemsFromJson
+- added ItemCreator
+## Patches
+- added ItemDatabase.DeSerialize Postfix
+- added ItemOperations.SetCollectibleItemValues Postfix
+- added Item.ItemAppearance.LoadSprite Prefix
+- added Item.ItemAppearance.Loadprefab Prefix
 
 # v0.1.0 (December 8th 2024)
 ## Furniture
