@@ -19,6 +19,7 @@ namespace Lavender
 
             Lavender.furnitureHandlers = new Dictionary<string, Lavender.FurnitureHandler>();
             Lavender.furnitureShopRestockHandlers = new Dictionary<string, Lavender.FurnitureShopRestockHandler>();
+            Lavender.createdFurniture = new List<Furniture>();
 
             new Lavender();
 

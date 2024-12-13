@@ -45,6 +45,13 @@ namespace Lavender
         public static Dictionary<string, FurnitureHandler> furnitureHandlers;
         public static Dictionary<string, FurnitureShopRestockHandler> furnitureShopRestockHandlers;
 
+        public static List<Furniture> createdFurniture;
+
+        public static Furniture? GetFurnitureByTitel(string titel)
+        {
+            return createdFurniture.Find((Furniture f) => f.title.Equals(titel));
+        }
+
         /// <summary>
         /// Gets all FurnitureHandler methods defined in the given Type: type and registers them for the Handler callback
         /// </summary>

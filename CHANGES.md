@@ -1,4 +1,8 @@
 # Upcoming
+## Furniture
+- added createdFurniture List
+  - added GetFurnitureByTitel
+  - added CreateShopFurniture (int amount, string furniture_titel)
 
 # v0.1.0 (December 8th 2024)
 ## Furniture

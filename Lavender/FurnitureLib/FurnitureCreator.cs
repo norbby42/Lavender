@@ -210,7 +210,7 @@ namespace Lavender.FurnitureLib
         }
 
         /// <summary>
-        /// Creats a Furniture from the given path to the FurnitureConfig json
+        /// Creats a Furniture from the given path to the FurnitureConfig json and adds it to the 'createdFurniture' list
         /// </summary>
         /// <param name="json_path">The path to the json</param>
         /// <returns></returns>
@@ -228,6 +228,8 @@ namespace Lavender.FurnitureLib
                         furnitureConfig.assetBundlePath = json_path.Substring(0, json_path.Length - Path.GetFileName(json_path).Length) + furnitureConfig.assetBundlePath;
                         Furniture f = FurnitureCreator.FurnitureConfigToFurniture(furnitureConfig);
                         f.addressableAssetPath = $"Lavender<#>{json_path}";
+
+                        if(f != null && !Lavender.createdFurniture.Contains(f)) Lavender.createdFurniture.Add(f);
 
                         return f;
                     }
@@ -256,6 +258,26 @@ namespace Lavender.FurnitureLib
         public static BuildingSystem.FurnitureInfo? CreateShopFurniture(string json_path, int amount = 1)
         {
             Furniture? f = Create(json_path);
+            if (f == null) return null;
+
+            TaskItem taskItem = (TaskItem)ScriptableObject.CreateInstance(typeof(TaskItem));
+            taskItem.itemName = f.title;
+            taskItem.itemDetails = f.details;
+            taskItem.image = f.image;
+            taskItem.itemType = TaskItem.Type.Furnitures;
+
+            return new BuildingSystem.FurnitureInfo(f, taskItem, null, amount, null);
+        }
+
+        /// <summary>
+        /// Creates an BuildingSystem.FurnitureInfo for the FurnitureShopRestockHandler
+        /// </summary>
+        /// <param name="furniture_titel">The name of the Furniture</param>
+        /// <param name="amount">The amount of the furniture you want to add to the shop</param>
+        /// <returns></returns>
+        public static BuildingSystem.FurnitureInfo? CreateShopFurniture(int amount, string furniture_titel)
+        {
+            Furniture? f = Lavender.GetFurnitureByTitel(furniture_titel);
             if (f == null) return null;
 
             TaskItem taskItem = (TaskItem)ScriptableObject.CreateInstance(typeof(TaskItem));
