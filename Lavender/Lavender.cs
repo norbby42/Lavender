@@ -7,6 +7,7 @@ using UnityEngine;
 using HarmonyLib;
 using Lavender.FurnitureLib;
 using Lavender.ItemLib;
+using Lavender.RecipeLib;
 using FullSerializer;
 
 namespace Lavender
@@ -38,6 +39,7 @@ namespace Lavender
 
             harmony.PatchAll(typeof(FurniturePatches));
             harmony.PatchAll(typeof(ItemPatches));
+            harmony.PatchAll(typeof(RecipePatches));
         }
 
         #region FurnitureLib
@@ -157,7 +159,7 @@ namespace Lavender
 
         public static void AddCustomItemsFromJson(string jsonPath, string mod_name)
         {
-            if (!File.Exists(jsonPath)) { LavenderLog.Error($"AddCustomItemsFromJson(): File at path '{jsonPath}' doesn't exists!");  return; }
+            if (!File.Exists(jsonPath)) { LavenderLog.Error($"AddCustomItemsFromJson(): File at path '{jsonPath}' doesn't exists!"); return; }
 
             try
             {
@@ -172,22 +174,22 @@ namespace Lavender
                     string path = jsonPath.Substring(0, jsonPath.Length - Path.GetFileName(jsonPath).Length);
 
                     // Sprite Path
-                    if(i.Appearance.SpritePath.EndsWith(".png") || i.Appearance.SpritePath.EndsWith(".jpg"))
+                    if (i.Appearance.SpritePath.EndsWith(".png") || i.Appearance.SpritePath.EndsWith(".jpg"))
                     {
                         i.Appearance.SpritePath = "Lavender_SRC#" + path + i.Appearance.SpritePath;
                     }
-                    else if(i.Appearance.SpritePath.Contains("#AB"))
+                    else if (i.Appearance.SpritePath.Contains("#AB"))
                     {
                         // path to assetbundle + #AB<Sprite_Name>
                         i.Appearance.SpritePath = "Lavender_AB#" + path + i.Appearance.SpritePath;
                     }
 
                     // Prefab Path
-                    if(i.Appearance.PrefabPath.EndsWith(".obj"))
+                    if (i.Appearance.PrefabPath.EndsWith(".obj"))
                     {
                         i.Appearance.PrefabPath = "Lavender_SRC#" + path + i.Appearance.PrefabPath;
                     }
-                    else if (i.Appearance.PrefabPath.Contains("#AB")) 
+                    else if (i.Appearance.PrefabPath.Contains("#AB"))
                     {
                         i.Appearance.PrefabPath = "Lavender_AB#" + path + i.Appearance.PrefabPath;
                     }
@@ -205,12 +207,57 @@ namespace Lavender
                     AddCustomItem(i, mod_name);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 LavenderLog.Error($"Error while loading '{mod_name}'s Item Database!\nException: {e}");
             }
         }
 
+        #endregion
+
+        #region RecipeLib
+        public static List<Recipe> customRecipeDatabase;
+
+        public static void AddCustomRecipe(Recipe recipe, string mod_name)
+        {
+            customRecipeDatabase.Add(recipe);
+        }
+
+        public static void AddCustomRecipesFromJson(string jsonPath, string mod_name)
+        {
+            if (!File.Exists(jsonPath)) { LavenderLog.Error($"AddCustomRecipesFromJson(): File at path '{jsonPath}' doesn't exists!"); return; }
+
+            try
+            {
+                fsData data = fsJsonParser.Parse(File.ReadAllText(jsonPath));
+                object result = null;
+                RecipeDatabase.JSON_serializer.TryDeserialize(data, typeof(List<Recipe>), ref result).AssertSuccessWithoutWarnings();
+
+                List<Recipe> Recipes = result as List<Recipe>;
+
+                foreach (Recipe r in Recipes)
+                {
+                    string path = jsonPath.Substring(0, jsonPath.Length - Path.GetFileName(jsonPath).Length);
+
+                    // Sprite Path
+                    if (r.Appearance.SpritePath.EndsWith(".png") || r.Appearance.SpritePath.EndsWith(".jpg"))
+                    {
+                        r.Appearance.SpritePath = "Lavender_SRC#" + path + r.Appearance.SpritePath;
+                    }
+                    else if (r.Appearance.SpritePath.Contains("#AB"))
+                    {
+                        // path to assetbundle + #AB<Sprite_Name>
+                        r.Appearance.SpritePath = "Lavender_AB#" + path + r.Appearance.SpritePath;
+                    }
+
+                    AddCustomRecipe(r, mod_name);
+                }
+            }
+            catch (Exception e)
+            {
+                LavenderLog.Error($"Error while loading '{mod_name}'s Recipe Database!\nException: {e}");
+            }
+        }
         #endregion
     }
 }

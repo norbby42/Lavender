@@ -23,6 +23,8 @@ namespace Lavender
 
             Lavender.customItemDatabase = new List<Item>();
 
+            Lavender.customRecipeDatabase = new List<Recipe>();
+
             new Lavender();
 
             SceneManager.sceneLoaded += OnSceneLoaded;
