@@ -71,9 +71,9 @@ namespace Lavender.FurnitureLib
             return false;
         }
 
-        [HarmonyPatch(typeof(FurnitureShop), nameof(FurnitureShop.UpdateShopItems))]
+        [HarmonyPatch(typeof(FurnitureShop), nameof(FurnitureShop.Restock))]
         [HarmonyPrefix]
-        static bool FurnitureShop_Restock_Prefix(FurnitureShop __instance)
+        static bool BaseShop_Restock_Prefix(FurnitureShop __instance)
         {
             __instance.MoneyRestock();
 
