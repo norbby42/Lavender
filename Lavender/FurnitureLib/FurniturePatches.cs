@@ -71,17 +71,11 @@ namespace Lavender.FurnitureLib
             return false;
         }
 
-        [HarmonyPatch(typeof(FurnitureShop), nameof(FurnitureShop.Restock))]
+        [HarmonyPatch(typeof(FurnitureShop), nameof(FurnitureShop.UpdateShopItems))]
         [HarmonyPrefix]
-        static bool BaseShop_Restock_Prefix(FurnitureShop __instance)
+        static bool FurnitureShop_UpdateShopItems_Postfix(FurnitureShop __instance)
         {
-            __instance.MoneyRestock();
-
-            MethodInfo methodInfo = typeof(FurnitureShop).GetMethod("UpdateShopItems", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
-            methodInfo.Invoke(__instance, new object[] { });
-
-            LavenderLog.Log($"Restocking '{(__instance.title != "" ? __instance.title : "One Stop Shop")}'");
-
+            __instance.availableFurnitures.Clear();
             FurnitureShopName name = (__instance.title == "" ? FurnitureShopName.OneStopShop : (__instance.title == "Möbelmann Furnitures" ? FurnitureShopName.MoebelmannFurnitures : (__instance.title == "Jonasson's Shop" ? FurnitureShopName.SamuelJonasson : FurnitureShopName.None)));
 
             if (name != FurnitureShopName.None)
@@ -90,6 +84,11 @@ namespace Lavender.FurnitureLib
                 {
                     __instance.availableFurnitures.AddRange(pair.Value.Invoke(name));
                 }
+            }
+
+            foreach (FurnitureShopItemsList furnitureShopItemsList in __instance.itemsLists)
+            {
+                __instance.availableFurnitures.AddRange(furnitureShopItemsList.GetFurnitureInfos(__instance.availableFurnitures));
             }
 
             if (!BepinexPlugin.Settings.FurnitureShop_Restock_Prefix_SkipOriginal.Value) return true;
