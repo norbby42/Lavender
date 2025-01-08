@@ -49,19 +49,19 @@ namespace Lavender.FurnitureLib
             return true;
         }
 
-        [HarmonyPatch(typeof(FurnitureShop), nameof(FurnitureShop.AddFurniture))]
+        [HarmonyPatch(typeof(FurnitureShop), nameof(FurnitureShop.AddItem))]
         [HarmonyPrefix]
-        static bool FurnitureShop_AddFurniture_Prefix(FurnitureShop __instance,ref bool __result, Furniture furniture, int amount)
+        static bool FurnitureShop_AddFurniture_Prefix(FurnitureShop __instance,ref bool __result, Furniture item, object meta, int amount)
         {
-            BuildingSystem.FurnitureInfo furnitureInfo = __instance.availableFurnitures.Find((BuildingSystem.FurnitureInfo f) => f.furniture.title == furniture.title);
+            BuildingSystem.FurnitureInfo furnitureInfo = __instance.availableFurnitures.Find((BuildingSystem.FurnitureInfo f) => f.furniture.title == item.title);
             if (furnitureInfo == null || furnitureInfo.furniture == null)
             {
                 TaskItem taskItem = (TaskItem)ScriptableObject.CreateInstance(typeof(TaskItem));
-                taskItem.itemName = furniture.title;
-                taskItem.itemDetails = furniture.details;
-                taskItem.image = furniture.image;
+                taskItem.itemName = item.title;
+                taskItem.itemDetails = item.details;
+                taskItem.image = item.image;
                 taskItem.itemType = TaskItem.Type.Furnitures;
-                __instance.availableFurnitures.Add(new BuildingSystem.FurnitureInfo(furniture, taskItem, null, amount, null));
+                __instance.availableFurnitures.Add(new BuildingSystem.FurnitureInfo(item, new BuildingSystem.FurnitureInfo.Meta(), taskItem, null, amount, null));
                 __result = true;
             }
             furnitureInfo.amount += amount;
@@ -71,7 +71,7 @@ namespace Lavender.FurnitureLib
             return false;
         }
 
-        [HarmonyPatch(typeof(FurnitureShop), nameof(FurnitureShop.Restock))]
+        [HarmonyPatch(typeof(FurnitureShop), nameof(FurnitureShop.UpdateShopItems))]
         [HarmonyPrefix]
         static bool FurnitureShop_Restock_Prefix(FurnitureShop __instance)
         {
@@ -113,10 +113,10 @@ namespace Lavender.FurnitureLib
             }
             savedGameObject = gameObject;
             BuildingSystem.FurnitureInfo info = __instance.availableFurnitures.Find((BuildingSystem.FurnitureInfo f) => f.furniture.title == furniture.title);
-            TaskItem taskItem = __instance.AddTaskItem(furniture, info, amount);
+            TaskItem taskItem = __instance.AddTaskItem(furniture, new BuildingSystem.FurnitureInfo.Meta(), info, amount);
             if (furnitureInfo == null || furnitureInfo.furniture == null || gameObject != null)
             {
-                __instance.availableFurnitures.Add(new BuildingSystem.FurnitureInfo(furniture, taskItem, gameObject, amount, null));
+                __instance.availableFurnitures.Add(new BuildingSystem.FurnitureInfo(furniture, new BuildingSystem.FurnitureInfo.Meta(), taskItem, gameObject, amount, null));
                 __instance.availableFurnitures.Sort((BuildingSystem.FurnitureInfo slot1, BuildingSystem.FurnitureInfo slot2) => slot1.furniture.name.CompareTo(slot2.furniture.name));
                 __result = true;
 
