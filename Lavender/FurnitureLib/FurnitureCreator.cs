@@ -266,7 +266,7 @@ namespace Lavender.FurnitureLib
             taskItem.image = f.image;
             taskItem.itemType = TaskItem.Type.Furnitures;
 
-            return new BuildingSystem.FurnitureInfo(f, taskItem, null, amount, null);
+            return new BuildingSystem.FurnitureInfo(f, new BuildingSystem.FurnitureInfo.Meta(), taskItem, null, amount, null);
         }
 
         /// <summary>
@@ -286,7 +286,7 @@ namespace Lavender.FurnitureLib
             taskItem.image = f.image;
             taskItem.itemType = TaskItem.Type.Furnitures;
 
-            return new BuildingSystem.FurnitureInfo(f, taskItem, null, amount, null);
+            return new BuildingSystem.FurnitureInfo(f, new BuildingSystem.FurnitureInfo.Meta(), taskItem, null, amount, null);
         }
     }
 }
