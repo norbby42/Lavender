@@ -18,6 +18,9 @@ public class TestCommandEcho : IConsoleCommand
             return;
         }
 
+        //Specifically call string.Trim(char[]) instead of 
+        //string.Trim(char) to avoid a netstandard 2.0 -> 2.1
+        //issue
         CommandManager.PrintToDevConsole(args[1].Trim(['"']));
     }
 }
