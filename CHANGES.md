@@ -13,6 +13,9 @@
   - added AddCustomRecipe
   - added AddCustomRecipesFromJson
 - added RecipeCreator
+## Developer Console
+- added Command manager (GreenMushLib merge)
+  - added PrintToDevConsole (GreenMushLib merge)
 ## Patches
 - added ItemDatabase.DeSerialize Postfix
 - added ItemOperations.SetCollectibleItemValues Postfix
@@ -20,7 +23,9 @@
 - added Item.ItemAppearance.Loadprefab Prefix
 - added RecipeDatabase.DeSerialize Postfix
 - added Recipe.RecipeAppearance.LoadSprite Prefix
+- added DeveloperConsole.HandleInput Prefix (GreenMushLib merge)
 
+*Downgraded project to netstandard 2.0*
 # v0.1.0 (December 8th 2024)
 ## Furniture
 - added FurnitureCreator
