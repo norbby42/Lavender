@@ -9,6 +9,7 @@ using Lavender.FurnitureLib;
 using Lavender.ItemLib;
 using Lavender.RecipeLib;
 using FullSerializer;
+using Lavender.CommandLib;
 
 namespace Lavender
 {
@@ -40,6 +41,7 @@ namespace Lavender
             harmony.PatchAll(typeof(FurniturePatches));
             harmony.PatchAll(typeof(ItemPatches));
             harmony.PatchAll(typeof(RecipePatches));
+            harmony.PatchAll(typeof(CommandManagerPatches));
         }
 
         #region FurnitureLib

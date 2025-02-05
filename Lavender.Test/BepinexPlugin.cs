@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using Lavender.FurnitureLib;
+using Lavender.CommandLib;
 using System.Reflection;
 using System.IO;
 
@@ -26,6 +27,9 @@ namespace Lavender.Test
 
             string recipesPath = Path.Combine(Assembly.GetExecutingAssembly().Location.Substring(0, Assembly.GetExecutingAssembly().Location.Length - 17), "Recipes.json");
             Lavender.AddCustomRecipesFromJson(recipesPath, LCMPluginInfo.PLUGIN_NAME);
+
+            //Console test
+            CommandManager.RegisterCommand(new TestCommandEcho());
 
             Log.LogInfo($"Plugin {LCMPluginInfo.PLUGIN_NAME} version {LCMPluginInfo.PLUGIN_VERSION} is loaded!");
         }
