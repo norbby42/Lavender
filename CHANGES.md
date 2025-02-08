@@ -1,8 +1,14 @@
 # Upcoming
+
+# v0.2.0 (February 2nd 2025)
 ## Furniture
 - added createdFurniture List
   - added GetFurnitureByTitel
   - added CreateShopFurniture (int amount, string furniture_titel)
+- updated FurnitureCreator
+- updated FurnitureConfig
+  - added Id
+  - added new categories
 ## Item
 - added customItemDatabase
   - added AddCustomItem

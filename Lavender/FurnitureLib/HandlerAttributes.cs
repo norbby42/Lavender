@@ -36,5 +36,7 @@ namespace Lavender.FurnitureLib
         MoebelmannFurnitures,
         [Description("Jonasson's Shop")]
         SamuelJonasson
+
+        // To do: Mine Shops
     }
 }

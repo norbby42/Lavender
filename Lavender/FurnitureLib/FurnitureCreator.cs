@@ -9,7 +9,7 @@ namespace Lavender.FurnitureLib
 {
     public class FurnitureCreator
     {
-        public static Furniture NewFurniture(string title, Sprite image, string details, Furniture.Category category, int priceOC, int priceRM, GameObject furniturePrefab, GameObject furniturePreviewPrefab, Furniture.BuildingArea[] restrictedArea, List<Furniture.ReseourceItem> dismantleItems, FurniturePlaceType placeType, Furniture.DisplayStyle displayStyle = Furniture.DisplayStyle.Default, int displayRotationY = 0)
+        public static Furniture NewFurniture(string id, string title, Sprite image, string details, Furniture.Category category, int priceOC, int priceRM, GameObject furniturePrefab, GameObject furniturePreviewPrefab, Furniture.BuildingArea[] restrictedArea, List<Furniture.ReseourceItem> dismantleItems, FurniturePlaceType placeType, Furniture.DisplayStyle displayStyle = Furniture.DisplayStyle.Default, int displayRotationY = 0)
         {
             Furniture furniture = ScriptableObject.CreateInstance<Furniture>();
 
@@ -39,6 +39,7 @@ namespace Lavender.FurnitureLib
             preview.layer = 11;
 
             //Furniture
+            furniture.id = id;
             furniture.title = title;
             furniture.image = image;
             furniture.details = details;
@@ -191,6 +192,7 @@ namespace Lavender.FurnitureLib
 
             // Creates the Furniture
             Furniture furniture = NewFurniture(
+                furnitureData.id,
                 furnitureData.title,
                 image,
                 furnitureData.details,
@@ -261,6 +263,7 @@ namespace Lavender.FurnitureLib
             if (f == null) return null;
 
             TaskItem taskItem = (TaskItem)ScriptableObject.CreateInstance(typeof(TaskItem));
+            taskItem.id = f.id;
             taskItem.itemName = f.title;
             taskItem.itemDetails = f.details;
             taskItem.image = f.image;
@@ -281,6 +284,7 @@ namespace Lavender.FurnitureLib
             if (f == null) return null;
 
             TaskItem taskItem = (TaskItem)ScriptableObject.CreateInstance(typeof(TaskItem));
+            taskItem.id = f.id;
             taskItem.itemName = f.title;
             taskItem.itemDetails = f.details;
             taskItem.image = f.image;

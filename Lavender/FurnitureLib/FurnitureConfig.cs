@@ -8,6 +8,10 @@ namespace Lavender.FurnitureLib
     public class FurnitureConfig
     {
         /// <summary>
+        /// Furniture ID
+        /// </summary>
+        public string id;
+        /// <summary>
         /// The name of the furniture
         /// </summary>
         public string title;
@@ -54,7 +58,7 @@ namespace Lavender.FurnitureLib
         /// <summary>
         /// Should it be positioned like a normal furniture or like a painting or ceiling object?
         /// </summary>
-        public FurnitureDisplayStyle displayStyle = FurnitureDisplayStyle.Default;
+        public FurnitureDisplayStyle displayStyle;
         /// <summary>
         /// Restricted places to build (wall, floor, etc)
         /// </summary>
@@ -67,6 +71,8 @@ namespace Lavender.FurnitureLib
         // To do:
 
         // public List<Furniture.ReseourceItem> dismantleItems;
+        // public Furniture.Skin[] skins;
+        // public Furniture.AlternativePrefab[] alternativePrefabs;
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
@@ -94,7 +100,12 @@ namespace Lavender.FurnitureLib
         Bathroom,
         Signs,
         Magazines,
-        Posters
+        Posters,
+        Curtains,
+        Flags,
+        LicensePlates,
+        Kitchen,
+        Tank
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
