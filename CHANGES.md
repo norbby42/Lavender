@@ -1,6 +1,6 @@
 # Upcoming
 
-# v0.2.0 (February 2nd 2025)
+# v0.2.0 (February 8th 2025)
 ## Furniture
 - added createdFurniture List
   - added GetFurnitureByTitel
