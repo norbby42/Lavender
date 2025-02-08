@@ -11,14 +11,21 @@
 
 **Lavender** is a powerful and user-friendly library mod designed to simplify the process of modding the game [Obenseuer](https://store.steampowered.com/app/951240/Obenseuer/) using BepInEx as mod loader.
 ## Nuget
-- **.Net CLI:** ``dotnet add package Lavender --version 0.1.0``
-- **PackageReference:** ``<PackageReference Include="Lavender" Version="0.1.0" />``
+- **.Net CLI:** ``dotnet add package Lavender --version 0.2.0``
+- **PackageReference:** ``<PackageReference Include="Lavender" Version="0.2.0" />``
 
 ## Features:
 - Furniture
   - Assets either via AssetBundles or OBJ & JPG/PNG
   - Custom Scripts
   - add to Shops
+- Item
+  - Assets either via AssetBundles or OBJ & JPG/PNG
+  - Just like the native Items.json
+- Recipe
+  - Just like the native Recipe.json
+- Developer Console
+  - Simply add new Console Commands
 ### Additional:
 - Runtime OBJ Importer
 - easy PNG/JPG Loader
