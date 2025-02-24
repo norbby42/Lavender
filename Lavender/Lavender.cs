@@ -38,10 +38,18 @@ namespace Lavender
 
             harmony = new Harmony(LCMPluginInfo.PLUGIN_GUID);
 
-            harmony.PatchAll(typeof(FurniturePatches));
-            harmony.PatchAll(typeof(ItemPatches));
-            harmony.PatchAll(typeof(RecipePatches));
-            harmony.PatchAll(typeof(CommandManagerPatches));
+            try
+            {
+                harmony.PatchAll(typeof(FurniturePatches));
+                harmony.PatchAll(typeof(ItemPatches));
+                harmony.PatchAll(typeof(RecipePatches));
+                harmony.PatchAll(typeof(CommandManagerPatches));
+            }
+            catch (Exception e)
+            {
+                LavenderLog.Error("Exception while applying Lavender patches:");
+                LavenderLog.Error(e.ToString());
+            }
         }
 
         #region FurnitureLib
