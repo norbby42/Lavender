@@ -1,11 +1,6 @@
-﻿using BehaviorDesigner.Runtime.Tasks;
-using HarmonyLib;
-using Newtonsoft.Json;
+﻿using HarmonyLib;
 using System;
-using System.IO;
-using System.Reflection;
 using UnityEngine;
-using static Money;
 
 namespace Lavender.FurnitureLib
 {
