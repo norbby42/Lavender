@@ -95,9 +95,11 @@ namespace Lavender.FurnitureLib
             return false;
         }
 
-        [HarmonyPatch(typeof(BuildingSystem), nameof(BuildingSystem.AddFurniture))]
+        [HarmonyPatch(typeof(BuildingSystem), nameof(BuildingSystem.AddFurniture),
+            [typeof(Furniture), typeof(UnityEngine.GameObject), typeof(UnityEngine.GameObject), typeof(int), typeof(BuildingSystem.FurnitureInfo.Meta)],
+            [ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Ref, ArgumentType.Normal, ArgumentType.Normal])]
         [HarmonyPrefix]
-        static bool BuildingSystem_AddFurniture_Prefix(BuildingSystem __instance, ref bool __result, Furniture furniture, GameObject gameObject, out GameObject savedGameObject, int amount = 1)
+        static bool BuildingSystem_AddFurniture_Prefix(BuildingSystem __instance, ref bool __result, Furniture furniture, GameObject gameObject, out GameObject savedGameObject, int amount)
         {
             BuildingSystem.FurnitureInfo furnitureInfo = __instance.availableFurnitures.Find((BuildingSystem.FurnitureInfo f) => f.furniture.title == furniture.title && f.gameObject == null);
             if (gameObject != null)
