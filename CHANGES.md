@@ -1,5 +1,10 @@
 # Upcoming
 
+# v0.2.1 (February 24th 2025)
+- added UseBepinexLog
+- added Harmony patching in a try/catch -> better error reporting
+- fixed BuildingSystem.AddFurniture Prefix being ambiguous
+
 # v0.2.0 (February 8th 2025)
 ## Furniture
 - added createdFurniture List
