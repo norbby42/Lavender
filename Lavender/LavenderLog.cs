@@ -7,20 +7,41 @@ namespace Lavender
     {
         public static void Log(string message)
         {
-            Debug.Log($"[<color=#9585f1>Lavender</color>] {message}");
+            if (BepinexPlugin.Settings.UseBepinexLog.Value)
+            {
+                BepinexPlugin.Log.LogInfo($"[<color=#9585f1>Lavender</color>] {message}");
+            }
+            else
+            {
+                Debug.Log($"[<color=#9585f1>Lavender</color>] {message}");
+            }
         }
 
         public static void Detailed(string message)
         {
             if(BepinexPlugin.Settings.DetailedLog.Value)
             {
-                Debug.Log($"[<color=#9585f1>Lavender</color>][Detailed] {message}");
+                if (BepinexPlugin.Settings.UseBepinexLog.Value)
+                {
+                    BepinexPlugin.Log.LogInfo($"[<color=#9585f1>Lavender</color>][Detailed] {message}");
+                }
+                else
+                {
+                    Debug.Log($"[<color=#9585f1>Lavender</color>][Detailed] {message}");
+                }
             }
         }
 
         public static void Error(string message)
         {
-            Debug.LogError($"[<color=#9585f1>Lavender</color>] {message}");
+            if (BepinexPlugin.Settings.UseBepinexLog.Value)
+            {
+                BepinexPlugin.Log.LogError($"[<color=#9585f1>Lavender</color>] {message}");
+            }
+            else
+            {
+                Debug.LogError($"[<color=#9585f1>Lavender</color>] {message}");
+            }
         }
     }
 }
