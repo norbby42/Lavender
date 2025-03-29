@@ -6,7 +6,7 @@ namespace Lavender.FurnitureLib
 {
     public static class FurniturePatches
     {
-        [HarmonyPatch(typeof(SavableScriptableObject), nameof(SavableScriptableObject.LoadFromPath))]
+        [HarmonyPatch(typeof(SavableScriptableObject), nameof(SavableScriptableObject.LoadFromPath), new Type[] { })]
         [HarmonyPrefix]
         static bool SavableScriptableObject_LoadFromPath_Prefix(SavableScriptableObject __instance, ref ScriptableObject __result)
         {

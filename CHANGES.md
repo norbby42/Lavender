@@ -1,4 +1,5 @@
 # Upcoming
+- fixed SavableScriptableObject.LoadFromPath being ambiguous in OS v0.4.05
 
 # v0.2.1 (February 24th 2025)
 - added UseBepinexLog
