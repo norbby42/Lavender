@@ -25,6 +25,9 @@ namespace Lavender
 
             Lavender.customRecipeDatabase = new List<Recipe>();
 
+            Lavender.customStorageCategoryDatabase = new List<StorageCategory>();
+            Lavender.customStorageSpawnCategoryDatabase = new List<StorageSpawnCategory>();
+
             new Lavender();
 
             SceneManager.sceneLoaded += OnSceneLoaded;

@@ -1,5 +1,18 @@
 # Upcoming
+## Furniture
 - fixed SavableScriptableObject.LoadFromPath being ambiguous in OS v0.4.05
+
+## Storage
+- added customStorageCategoryDatabase
+  - added AddCustomStorageCategory
+  - added AddCustomStorageCategoryFromJson
+- added customStorageSpawnCategoryDatabase
+  - added AddCustomStorageSpawnCategory
+  - added AddCustomStorageSpawnCategoryFromJson
+
+## Patches
+- added StorageCategoryDatabase.DeSerialize Postfix
+- added StorageSpawnCategoryDatabase.DeSerialize Postfix
 
 # v0.2.1 (February 24th 2025)
 - added UseBepinexLog

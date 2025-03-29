@@ -10,6 +10,7 @@ using Lavender.ItemLib;
 using Lavender.RecipeLib;
 using FullSerializer;
 using Lavender.CommandLib;
+using Lavender.StorageLib;
 
 namespace Lavender
 {
@@ -44,6 +45,7 @@ namespace Lavender
                 harmony.PatchAll(typeof(ItemPatches));
                 harmony.PatchAll(typeof(RecipePatches));
                 harmony.PatchAll(typeof(CommandManagerPatches));
+                harmony.PatchAll(typeof(StoragePatches));
             }
             catch (Exception e)
             {
@@ -268,6 +270,69 @@ namespace Lavender
                 LavenderLog.Error($"Error while loading '{mod_name}'s Recipe Database!\nException: {e}");
             }
         }
+        #endregion
+
+        #region StorageLib
+
+        public static List<StorageCategory> customStorageCategoryDatabase;
+        public static List<StorageSpawnCategory> customStorageSpawnCategoryDatabase;
+
+        public static void AddCustomStorageCategory(StorageCategory category)
+        {
+            customStorageCategoryDatabase.Add(category);
+        }
+
+        public static void AddCustomStorageSpawnCategory(StorageSpawnCategory category)
+        {
+            customStorageSpawnCategoryDatabase.Add(category);
+        }
+
+        public static void AddCustomStorageCategoryFromJson(string jsonPath, string mod_name)
+        {
+            if (!File.Exists(jsonPath)) { LavenderLog.Error($"AddCustomStorageCategoryFromJson(): File at path '{jsonPath}' doesn't exists!"); return; }
+
+            try
+            {
+                fsData data = fsJsonParser.Parse(File.ReadAllText(jsonPath));
+                object? result = null;
+                StorageCategoryDatabase.JSON_serializer.TryDeserialize(data, typeof(List<StorageCategory>), ref result).AssertSuccessWithoutWarnings();
+
+                List<StorageCategory> categories = result as List<StorageCategory>;
+
+                foreach(StorageCategory category in categories)
+                {
+                    AddCustomStorageCategory(category);
+                }
+            }
+            catch (Exception e)
+            {
+                LavenderLog.Error($"Error while loading '{mod_name}'s StorageCategory Database!\nException: {e}");
+            }
+        }
+
+        public static void AddCustomStorageSpawnCategoryFromJson(string jsonPath, string mod_name)
+        {
+            if (!File.Exists(jsonPath)) { LavenderLog.Error($"AddCustomStorageSpawnCategoryFromJson(): File at path '{jsonPath}' doesn't exists!"); return; }
+
+            try
+            {
+                fsData data = fsJsonParser.Parse(File.ReadAllText(jsonPath));
+                object? result = null;
+                StorageSpawnCategoryDatabase.JSON_serializer.TryDeserialize(data, typeof(List<StorageSpawnCategory>), ref result).AssertSuccessWithoutWarnings();
+
+                List<StorageSpawnCategory> categories = result as List<StorageSpawnCategory>;
+
+                foreach (StorageSpawnCategory category in categories)
+                {
+                    AddCustomStorageSpawnCategory(category);
+                }
+            }
+            catch (Exception e)
+            {
+                LavenderLog.Error($"Error while loading '{mod_name}'s StorageSpawnCategory Database!\nException: {e}");
+            }
+        }
+
         #endregion
     }
 }
