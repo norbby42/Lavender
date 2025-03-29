@@ -7,9 +7,11 @@ namespace Lavender.StorageLib
 {
     public static class StorageCreator
     {
-        public static void AddStorage(GameObject gameObject, string title, string useMessage,string storageCategoryName, string storageSpawnCategoryName, SpawnSettings spawnSettings, bool spawnAtStart, bool spawnItemsFromCategory)
+        /* Doesn't work :(
+        public static GameObject AddStorage(GameObject gameObject, string title, string useMessage,string storageCategoryName, string storageSpawnCategoryName, SpawnSettings spawnSettings, bool spawnAtStart, bool spawnItemsFromCategory)
         {
             Storage storage = gameObject.AddComponent<Storage>();
+            gameObject.layer = 17; // Needs to be on the 'useable' layer so the player can interact with it
 
             storage.title = title;
             storage.useMessage = useMessage;
@@ -23,6 +25,8 @@ namespace Lavender.StorageLib
 
             storage.spawnAtStart = spawnAtStart;
             storage.spawnItemsFromCategory = spawnItemsFromCategory;
+
+            return gameObject;
         }
 
         public static SpawnSettings CreateSimpleSpawnSettings(bool respawnEnabled, SpawnSettings.SpawnTime spawnTime)
@@ -34,6 +38,6 @@ namespace Lavender.StorageLib
             spawnSettings.useCustomSpawnTime = false;
 
             return spawnSettings;
-        }
+        }*/
     }
 }
