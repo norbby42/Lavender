@@ -66,7 +66,12 @@ namespace Lavender.FurnitureLib
         static bool FurnitureShop_UpdateShopItems_Postfix(FurnitureShop __instance)
         {
             __instance.availableFurnitures.Clear();
-            FurnitureShopName name = (__instance.title == "" ? FurnitureShopName.OneStopShop : (__instance.title == "Möbelmann Furnitures" ? FurnitureShopName.MoebelmannFurnitures : (__instance.title == "Jonasson's Shop" ? FurnitureShopName.SamuelJonasson : FurnitureShopName.None)));
+            FurnitureShopName name = (__instance.title == "" ? FurnitureShopName.OneStopShop : 
+                (__instance.title == "Möbelmann Furnitures" ? FurnitureShopName.MoebelmannFurnitures : 
+                (__instance.title == "Jonasson's Shop" ? FurnitureShopName.SamuelJonasson : 
+                (__instance.title == "OS Mining Services" ? FurnitureShopName.OSMiningServices : FurnitureShopName.None))));
+
+            //OS Mining Services
 
             if (name != FurnitureShopName.None)
             {

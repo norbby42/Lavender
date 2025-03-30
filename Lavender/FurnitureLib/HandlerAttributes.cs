@@ -35,8 +35,8 @@ namespace Lavender.FurnitureLib
         [Description("Möbelmann Furnitures")]
         MoebelmannFurnitures,
         [Description("Jonasson's Shop")]
-        SamuelJonasson
-
-        // To do: Mine Shops
+        SamuelJonasson,
+        [Description("OS Mining Services")]
+        OSMiningServices
     }
 }
