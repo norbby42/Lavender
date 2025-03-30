@@ -30,6 +30,7 @@ namespace Lavender
 
             new Lavender();
 
+            SceneManager.sceneUnloaded += OnSceneUnloaded;
             SceneManager.sceneLoaded += OnSceneLoaded;
             SaveController.LoadingDone += onLoadingDone;
 
@@ -38,6 +39,17 @@ namespace Lavender
             Lavender.instance.isInitialized = true;
 
             Settings.LogUnstableStatus();
+        }
+
+        private void OnSceneUnloaded(Scene current)
+        {
+            if (Lavender.FurnitureDatabase != null)
+            {
+                LavenderLog.Log($"Unloading {Lavender.FurnitureDatabase.Count} Furnitures...");
+
+                Lavender.FurnitureDatabase.Clear();
+                Lavender.FurnitureDBParent = null;
+            }
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)

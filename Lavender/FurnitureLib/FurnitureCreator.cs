@@ -7,21 +7,14 @@ using UnityEngine;
 
 namespace Lavender.FurnitureLib
 {
-    public class FurnitureDatabaseGameObject : MonoBehaviour
-    {
-        void Awake()
-        {
-            DontDestroyOnLoad(this.gameObject);
-            this.gameObject.SetActive(false);
-        }
-    }
-
     public class FurnitureCreator
     {
         internal static GameObject FurnitureDBParent_Innit()
         {
+            LavenderLog.Log("Furniture Database Innit...");
+
             GameObject gameObject = new GameObject("Lavender.FurnitureDatabase");
-            gameObject.AddComponent<FurnitureDatabaseGameObject>();
+            gameObject.SetActive(false);
 
             return gameObject;
         }
@@ -65,7 +58,12 @@ namespace Lavender.FurnitureLib
             preview.layer = 11;
 
             //Sort Prefabs
-            if(Lavender.FurnitureDBParent != null )
+            if(Lavender.FurnitureDBParent == null)
+            {
+                Lavender.FurnitureDBParent = FurnitureDBParent_Innit();
+            }
+
+            if (Lavender.FurnitureDBParent != null)
             {
                 prefab.transform.SetParent(Lavender.FurnitureDBParent.transform);
                 preview.transform.SetParent(Lavender.FurnitureDBParent.transform);

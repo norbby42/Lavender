@@ -52,8 +52,6 @@ namespace Lavender
                 LavenderLog.Error("Exception while applying Lavender patches:");
                 LavenderLog.Error(e.ToString());
             }
-
-            FurnitureDBParent = FurnitureCreator.FurnitureDBParent_Innit();
         }
 
         #region FurnitureLib
@@ -66,7 +64,7 @@ namespace Lavender
 
         public static List<Furniture> FurnitureDatabase;
 
-        public static GameObject FurnitureDBParent;
+        public static GameObject? FurnitureDBParent;
 
         public static Furniture? FetchFurnitureByTitel(string title)
         {
