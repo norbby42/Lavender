@@ -17,10 +17,14 @@
 - added customStorageSpawnCategoryDatabase
   - added AddCustomStorageSpawnCategory
   - added AddCustomStorageSpawnCategoryFromJson
+- added StorageCreator
+  - added AddSimpleStorage
 
 ## Patches
 - added StorageCategoryDatabase.DeSerialize Postfix
+- added StorageCategoryDatabase.FetchCategoryByName Postfix
 - added StorageSpawnCategoryDatabase.DeSerialize Postfix
+- added StorageSpawnCategoryDatabase.FetchStorageSpawnCategory Postfix
 
 # v0.2.1 (February 24th 2025)
 - added UseBepinexLog

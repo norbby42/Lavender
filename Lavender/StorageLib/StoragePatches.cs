@@ -93,5 +93,41 @@ namespace Lavender.StorageLib
                 }
             }
         }
+
+        [HarmonyPatch(typeof(StorageCategoryDatabase), nameof(StorageCategoryDatabase.FetchCategoryByName))]
+        [HarmonyPostfix]
+        static void StorageCategoryDatabase_FetchCategoryByName_Postfix(StorageCategoryDatabase __instance, ref StorageCategory __result, string name)
+        {
+            StorageCategory? category = Lavender.customStorageCategoryDatabase.Find((StorageCategory s) => s.Name == name);
+
+            if (category != null && __result != null) 
+            {
+                __result = category;
+
+                LavenderLog.Log($"Replacing vanilla StorageCategory name={category.Name} with mod StorageCategory!");
+            }
+            else if (category != null) 
+            { 
+                __result = category; 
+            }
+        }
+
+        [HarmonyPatch(typeof(StorageSpawnCategoryDatabase), nameof(StorageSpawnCategoryDatabase.FetchStorageSpawnCategory))]
+        [HarmonyPostfix]
+        static void StorageSpawnCategoryDatabase_FetchCategoryByName_Postfix(StorageSpawnCategoryDatabase __instance, ref StorageSpawnCategory __result, string category)
+        {
+            StorageSpawnCategory? r = Lavender.customStorageSpawnCategoryDatabase.Find((StorageSpawnCategory s) => s.Name == category);
+
+            if (r != null && __result != null)
+            {
+                __result = r;
+
+                LavenderLog.Log($"Replacing vanilla StorageSpawnCategory name={r.Name} with mod StorageSpawnCategory!");
+            }
+            else if (r != null)
+            {
+                __result = r;
+            }
+        }
     }
 }

@@ -16,6 +16,8 @@ namespace Lavender.Test
         {
             Debug.Log($"[OSML BOX] Hello world from {gameObject.name}!");
 
+            StorageCreator.AddSimpleStorage(gameObject, "Modded Storage", "View", "StorageTest");
+
             return gameObject;
         }
 

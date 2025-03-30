@@ -31,6 +31,10 @@ namespace Lavender.Test
             //Console test
             CommandManager.RegisterCommand(new TestCommandEcho());
 
+            //Storage test
+            string storageSettingsPath = Path.Combine(Assembly.GetExecutingAssembly().Location.Substring(0, Assembly.GetExecutingAssembly().Location.Length - 17), "StorageSettings.json");
+            Lavender.AddCustomStorageCategoryFromJson(storageSettingsPath, LCMPluginInfo.PLUGIN_NAME);
+
             Log.LogInfo($"Plugin {LCMPluginInfo.PLUGIN_NAME} version {LCMPluginInfo.PLUGIN_VERSION} is loaded!");
         }
 
