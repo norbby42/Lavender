@@ -11,12 +11,12 @@ namespace Lavender.Test
 {
     public class FurnitureHandlerTest
     {
-        [FurnitureHandlerAttribute("OSML Box")]
-        public static Furniture osmlBoxHandler(Furniture furniture)
+        [FurniturePrefabHandlerAttribute("OSML Box")]
+        public static GameObject osmlBoxHandler(GameObject gameObject)
         {
-            Debug.Log($"[{furniture.title}] Hello!");
+            Debug.Log($"[OSML BOX] Hello world from {gameObject.name}!");
 
-            return furniture;
+            return gameObject;
         }
 
         [FurnitureShopRestockHandlerAttribute("LavenderTest")]

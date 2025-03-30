@@ -18,7 +18,7 @@ namespace Lavender.Test
 
             SaveController.LoadingDone += onLoadingDone;
 
-            Lavender.AddFurnitureHandlers(typeof(FurnitureHandlerTest));
+            Lavender.AddFurniturePrefabHandlers(typeof(FurnitureHandlerTest));
             Lavender.AddFurnitureShopRestockHandlers(typeof(FurnitureHandlerTest));
 
             // Item test

@@ -19,15 +19,10 @@ namespace Lavender.FurnitureLib
 
                     try
                     {
-                        Furniture f = FurnitureCreator.Create(path);
+                        Furniture? f = FurnitureCreator.Create(path);
 
                         if (f != null)
                         {
-                            if (Lavender.furnitureHandlers.TryGetValue(f.title, out Lavender.FurnitureHandler handler))
-                            {
-                                f = handler.Invoke(f);
-                            }
-
                             __result = f;
                         }
                     }

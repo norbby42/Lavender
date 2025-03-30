@@ -1,6 +1,14 @@
 # Upcoming
 ## Furniture
 - fixed SavableScriptableObject.LoadFromPath being ambiguous in OS v0.4.05
+- reworked createdFurniture List as FurnitureDatabase
+  - renamed GetFurnitureByTitle to FetchFurnitureByTitle
+  - added FetchFurnitureByID
+  - added FurnitureDatabaseParent GameObject
+- improved FurnitureCreator methods (Database usage & no duplicate loading)
+- removed FurnitureHandler
+- added FurniturePrefabHandlerAttribute
+  - renamed all FurnitureHandlerAttribute functions to FurniturePrefabHandlerAttribute
 
 ## Storage
 - added customStorageCategoryDatabase

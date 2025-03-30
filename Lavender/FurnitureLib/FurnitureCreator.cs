@@ -7,8 +7,25 @@ using UnityEngine;
 
 namespace Lavender.FurnitureLib
 {
+    public class FurnitureDatabaseGameObject : MonoBehaviour
+    {
+        void Awake()
+        {
+            DontDestroyOnLoad(this.gameObject);
+            this.gameObject.SetActive(false);
+        }
+    }
+
     public class FurnitureCreator
     {
+        internal static GameObject FurnitureDBParent_Innit()
+        {
+            GameObject gameObject = new GameObject("Lavender.FurnitureDatabase");
+            gameObject.AddComponent<FurnitureDatabaseGameObject>();
+
+            return gameObject;
+        }
+
         public static Furniture NewFurniture(string id, string title, Sprite image, string details, Furniture.Category category, int priceOC, int priceRM, GameObject furniturePrefab, GameObject furniturePreviewPrefab, Furniture.BuildingArea[] restrictedArea, List<Furniture.ReseourceItem> dismantleItems, FurniturePlaceType placeType, Furniture.DisplayStyle displayStyle = Furniture.DisplayStyle.Default, int displayRotationY = 0)
         {
             Furniture furniture = ScriptableObject.CreateInstance<Furniture>();
@@ -20,6 +37,15 @@ namespace Lavender.FurnitureLib
 
             GameObject prefabRotate = new GameObject("rotate");
             prefabRotate.transform.parent = prefab.transform;
+
+            if (Lavender.furniturePrefabHandlers.TryGetValue(title, out Lavender.FurniturePrefabHandler handler))
+            {
+                furniturePrefab = handler.Invoke(furniturePrefab);
+            }
+            else
+            {
+                LavenderLog.Log($"WARNING! No Prefab Handler found for Furniture '{title}'!");
+            }
 
             furniturePrefab.transform.parent = prefabRotate.transform;
 
@@ -37,6 +63,13 @@ namespace Lavender.FurnitureLib
             furniturePreviewPrefab.transform.parent = previewRotate.transform;
 
             preview.layer = 11;
+
+            //Sort Prefabs
+            if(Lavender.FurnitureDBParent != null )
+            {
+                prefab.transform.SetParent(Lavender.FurnitureDBParent.transform);
+                preview.transform.SetParent(Lavender.FurnitureDBParent.transform);
+            }
 
             //Furniture
             furniture.id = id;
@@ -215,8 +248,9 @@ namespace Lavender.FurnitureLib
         /// Creats a Furniture from the given path to the FurnitureConfig json and adds it to the 'createdFurniture' list
         /// </summary>
         /// <param name="json_path">The path to the json</param>
+        /// <param name="overwrite_db">Overwrite the Database entry if a furniture with this name or id allready exists?</param>
         /// <returns></returns>
-        public static Furniture? Create(string json_path)
+        public static Furniture? Create(string json_path, bool overwrite_db = false)
         {
             if(File.Exists(json_path))
             {
@@ -228,10 +262,17 @@ namespace Lavender.FurnitureLib
                     if (furnitureConfig != null)
                     {
                         furnitureConfig.assetBundlePath = json_path.Substring(0, json_path.Length - Path.GetFileName(json_path).Length) + furnitureConfig.assetBundlePath;
+
+                        Furniture? furniture = Lavender.FurnitureDatabase.Find((Furniture f) => f.title.Equals(furnitureConfig.title) || f.id.Equals(furnitureConfig.id));
+                        if (furniture != null && overwrite_db == false)
+                        {
+                            return furniture;
+                        }
+
                         Furniture f = FurnitureCreator.FurnitureConfigToFurniture(furnitureConfig);
                         f.addressableAssetPath = $"Lavender<#>{json_path}";
 
-                        if(f != null && !Lavender.createdFurniture.Contains(f)) Lavender.createdFurniture.Add(f);
+                        if(f != null && !Lavender.FurnitureDatabase.Contains(f)) Lavender.FurnitureDatabase.Add(f);
 
                         return f;
                     }
@@ -280,7 +321,7 @@ namespace Lavender.FurnitureLib
         /// <returns></returns>
         public static BuildingSystem.FurnitureInfo? CreateShopFurniture(int amount, string furniture_titel)
         {
-            Furniture? f = Lavender.GetFurnitureByTitel(furniture_titel);
+            Furniture? f = Lavender.FetchFurnitureByTitel(furniture_titel);
             if (f == null) return null;
 
             TaskItem taskItem = (TaskItem)ScriptableObject.CreateInstance(typeof(TaskItem));

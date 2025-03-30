@@ -17,9 +17,9 @@ namespace Lavender
             Log = Logger;
             Settings = new LavenderSettings(Config);
 
-            Lavender.furnitureHandlers = new Dictionary<string, Lavender.FurnitureHandler>();
+            Lavender.furniturePrefabHandlers = new Dictionary<string, Lavender.FurniturePrefabHandler>();
             Lavender.furnitureShopRestockHandlers = new Dictionary<string, Lavender.FurnitureShopRestockHandler>();
-            Lavender.createdFurniture = new List<Furniture>();
+            Lavender.FurnitureDatabase = new List<Furniture>();
 
             Lavender.customItemDatabase = new List<Item>();
 

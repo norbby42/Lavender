@@ -6,11 +6,11 @@ using System.Text;
 namespace Lavender.FurnitureLib
 {
     [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
-    public sealed class FurnitureHandlerAttribute : System.Attribute
+    public sealed class FurniturePrefabHandlerAttribute : System.Attribute
     {
         public readonly string FurnitureTitle;
 
-        public FurnitureHandlerAttribute(string furnitureTitle)
+        public FurniturePrefabHandlerAttribute(string furnitureTitle)
         {
             FurnitureTitle = furnitureTitle;
         }

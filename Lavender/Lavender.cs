@@ -52,35 +52,44 @@ namespace Lavender
                 LavenderLog.Error("Exception while applying Lavender patches:");
                 LavenderLog.Error(e.ToString());
             }
+
+            FurnitureDBParent = FurnitureCreator.FurnitureDBParent_Innit();
         }
 
         #region FurnitureLib
 
-        public delegate Furniture FurnitureHandler(Furniture furniture);
+        public delegate GameObject FurniturePrefabHandler(GameObject prefab);
         public delegate List<BuildingSystem.FurnitureInfo> FurnitureShopRestockHandler(FurnitureShopName name);
 
-        public static Dictionary<string, FurnitureHandler> furnitureHandlers;
+        public static Dictionary<string, FurniturePrefabHandler> furniturePrefabHandlers;
         public static Dictionary<string, FurnitureShopRestockHandler> furnitureShopRestockHandlers;
 
-        public static List<Furniture> createdFurniture;
+        public static List<Furniture> FurnitureDatabase;
 
-        public static Furniture? GetFurnitureByTitel(string titel)
+        public static GameObject FurnitureDBParent;
+
+        public static Furniture? FetchFurnitureByTitel(string title)
         {
-            return createdFurniture.Find((Furniture f) => f.title.Equals(titel));
+            return FurnitureDatabase.Find((Furniture f) => f.title.Equals(title));
+        }
+
+        public static Furniture? FetchFurnitureByID(string ID)
+        {
+            return FurnitureDatabase.Find((Furniture f) => f.id.Equals(ID));
         }
 
         /// <summary>
-        /// Gets all FurnitureHandler methods defined in the given Type: type and registers them for the Handler callback
+        /// Gets all FurniturePrefabHandler methods defined in the given Type: type and registers them for the Handler callback
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static bool AddFurnitureHandlers(Type type)
+        public static bool AddFurniturePrefabHandlers(Type type)
         {
-            MethodInfo[] methods = type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance).Where(m => m.GetCustomAttributes(typeof(FurnitureHandlerAttribute), false).Length > 0).ToArray();
+            MethodInfo[] methods = type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance).Where(m => m.GetCustomAttributes(typeof(FurniturePrefabHandlerAttribute), false).Length > 0).ToArray();
 
             foreach (MethodInfo method in methods)
             {
-                FurnitureHandlerAttribute attribute = method.GetCustomAttribute<FurnitureHandlerAttribute>();
+                FurniturePrefabHandlerAttribute attribute = method.GetCustomAttribute<FurniturePrefabHandlerAttribute>();
 
                 if (!method.IsStatic)
                 {
@@ -88,17 +97,17 @@ namespace Lavender
                     return false;
                 }
 
-                Delegate furnitureHandler = Delegate.CreateDelegate(typeof(FurnitureHandler), method, false);
+                Delegate furnitureHandler = Delegate.CreateDelegate(typeof(FurniturePrefabHandler), method, false);
                 if (furnitureHandler != null)
                 {
-                    if (furnitureHandlers.ContainsKey(attribute.FurnitureTitle))
+                    if (furniturePrefabHandlers.ContainsKey(attribute.FurnitureTitle))
                     {
                         LavenderLog.Error($"DuplicateHandlerException: '{method.DeclaringType}.{method.Name}' Only one handler method is allowed per furniture!");
                         return false;
                     }
                     else
                     {
-                        furnitureHandlers.Add(attribute.FurnitureTitle, (FurnitureHandler)furnitureHandler);
+                        furniturePrefabHandlers.Add(attribute.FurnitureTitle, (FurniturePrefabHandler)furnitureHandler);
                     }
                 }
                 else
