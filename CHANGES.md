@@ -1,4 +1,6 @@
 # Upcoming
+
+# v0.3.0 ("March 30th 2025)
 ## Furniture
 - fixed SavableScriptableObject.LoadFromPath being ambiguous in OS v0.4.05
 - reworked createdFurniture List as FurnitureDatabase

@@ -66,7 +66,7 @@ namespace Lavender
 
         public static GameObject? FurnitureDBParent;
 
-        public static Furniture? FetchFurnitureByTitel(string title)
+        public static Furniture? FetchFurnitureByTitle(string title)
         {
             return FurnitureDatabase.Find((Furniture f) => f.title.Equals(title));
         }

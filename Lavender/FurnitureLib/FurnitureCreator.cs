@@ -319,7 +319,7 @@ namespace Lavender.FurnitureLib
         /// <returns></returns>
         public static BuildingSystem.FurnitureInfo? CreateShopFurniture(int amount, string furniture_titel)
         {
-            Furniture? f = Lavender.FetchFurnitureByTitel(furniture_titel);
+            Furniture? f = Lavender.FetchFurnitureByTitle(furniture_titel);
             if (f == null) return null;
 
             TaskItem taskItem = (TaskItem)ScriptableObject.CreateInstance(typeof(TaskItem));
