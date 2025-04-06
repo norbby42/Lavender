@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
+using Lavender.RecipeLib;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,6 +24,8 @@ namespace Lavender
 
             Lavender.customItemDatabase = new List<Item>();
 
+            Lavender.modifierInfos = new List<ModifierInfo>();
+            Lavender.appliedCustomCraftingBaseModifiers = new Dictionary<string, int>();
             Lavender.customRecipeDatabase = new List<Recipe>();
 
             Lavender.customStorageCategoryDatabase = new List<StorageCategory>();

@@ -4,11 +4,47 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Lavender.RecipeLib
 {
     public static class RecipePatches
     {
+        [HarmonyPatch(typeof(CraftingBase), nameof(CraftingBase.Start))]
+        [HarmonyPrefix]
+        static bool CraftingBase_OnLoadingGame_Prefix(CraftingBase __instance)
+        {
+            foreach(var item in Lavender.appliedCustomCraftingBaseModifiers)
+            {
+                if(item.Key == __instance.ManuName)
+                {
+                    __instance.Modifiers.Add((RecipeCondition)item.Value);
+                }
+            }
+
+            return true;
+        }
+
+        [HarmonyPatch(typeof(ModifierUI), nameof(ModifierUI.UpdateModifierInfo), [typeof(RecipeCondition)], [ArgumentType.Normal])]
+        [HarmonyPrefix]
+        static bool ModifierUI_UpdateModifierInfo_Prefix(ModifierUI __instance, RecipeCondition modifier)
+        {
+            Debug.Log($"Modifier: id={(int)modifier}");
+
+            if(Enum.IsDefined(typeof(RecipeCondition), modifier)) return true;
+
+            ModifierInfo? info = Lavender.modifierInfos.Find((ModifierInfo i) => i.id == (int)modifier);
+
+            if(info != null)
+            {
+                __instance.toolTipInfo.UpdateToolTipInfo(info.TooltipTitel, info.TooltipDetails, true);
+
+                __instance.modifierImage.sprite = info.Image;
+            }
+
+            return false;
+        }
+
         [HarmonyPatch(typeof(RecipeDatabase), nameof(RecipeDatabase.DeSerialize))]
         [HarmonyPostfix]
         static void RecipeDatabase_DeSerialize_Postfix(ref object __result, Type type, string serializedState)

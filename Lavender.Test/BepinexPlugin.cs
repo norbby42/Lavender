@@ -28,6 +28,10 @@ namespace Lavender.Test
             string recipesPath = Path.Combine(Assembly.GetExecutingAssembly().Location.Substring(0, Assembly.GetExecutingAssembly().Location.Length - 17), "Recipes.json");
             Lavender.AddCustomRecipesFromJson(recipesPath, LCMPluginInfo.PLUGIN_NAME);
 
+            string imagePath = Path.Combine(Assembly.GetExecutingAssembly().Location.Substring(0, Assembly.GetExecutingAssembly().Location.Length - 17), "item_test_img.png");
+            Lavender.AddModiefierInfo(new RecipeLib.ModifierInfo(101, "Nextej Modifier Test", "Test, test, 123..", RuntimeImporter.ImageLoader.LoadSprite(imagePath)));
+            Lavender.AddModiefierToCraftingBase("Brick Furnace", 101);
+
             //Console test
             CommandManager.RegisterCommand(new TestCommandEcho());
 

@@ -235,6 +235,13 @@ namespace Lavender
         #endregion
 
         #region RecipeLib
+        public static List<ModifierInfo> modifierInfos;
+
+        /// <summary>
+        /// ManuName, modiefier_ID
+        /// </summary>
+        public static Dictionary<string, int> appliedCustomCraftingBaseModifiers;
+
         public static List<Recipe> customRecipeDatabase;
 
         public static void AddCustomRecipe(Recipe recipe, string mod_name)
@@ -276,6 +283,27 @@ namespace Lavender
             {
                 LavenderLog.Error($"Error while loading '{mod_name}'s Recipe Database!\nException: {e}");
             }
+        }
+
+        public static void AddModiefierToCraftingBase(string manu_name, int modiefier_id, bool skip_warnings = false)
+        {
+            if(Enum.IsDefined(typeof(RecipeCondition), modiefier_id) && !skip_warnings)
+            {
+                LavenderLog.Error($"WARNING: RecipeCondition with id {modiefier_id} is a base game modiefier!");
+            }
+
+            appliedCustomCraftingBaseModifiers.Add(manu_name, modiefier_id);
+        }
+
+        public static void AddModiefierInfo(ModifierInfo info)
+        {
+            if (modifierInfos.Find((ModifierInfo i) => i.id == info.id) != null)
+            {
+                LavenderLog.Error($"Couldn't add ModiefierInfo id={info.id} because another ModiefierInfo allready uses this id!");
+                return;
+            }
+
+            modifierInfos.Add(info);
         }
         #endregion
 
