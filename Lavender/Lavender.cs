@@ -238,7 +238,7 @@ namespace Lavender
         public static List<ModifierInfo> modifierInfos;
 
         /// <summary>
-        /// ManuName, modiefier_ID
+        /// ManuName, modifier_ID
         /// </summary>
         public static Dictionary<string, int> appliedCustomCraftingBaseModifiers;
 
@@ -285,21 +285,21 @@ namespace Lavender
             }
         }
 
-        public static void AddModiefierToCraftingBase(string manu_name, int modiefier_id, bool skip_warnings = false)
+        public static void AddModifierToCraftingBase(string manu_name, int modifier_id, bool skip_warnings = false)
         {
-            if(Enum.IsDefined(typeof(RecipeCondition), modiefier_id) && !skip_warnings)
+            if(Enum.IsDefined(typeof(RecipeCondition), modifier_id) && !skip_warnings)
             {
-                LavenderLog.Error($"WARNING: RecipeCondition with id {modiefier_id} is a base game modiefier!");
+                LavenderLog.Error($"WARNING: RecipeCondition with id {modifier_id} is a base game modifier!");
             }
 
-            appliedCustomCraftingBaseModifiers.Add(manu_name, modiefier_id);
+            appliedCustomCraftingBaseModifiers.Add(manu_name, modifier_id);
         }
 
-        public static void AddModiefierInfo(ModifierInfo info)
+        public static void AddModifierInfo(ModifierInfo info)
         {
             if (modifierInfos.Find((ModifierInfo i) => i.id == info.id) != null)
             {
-                LavenderLog.Error($"Couldn't add ModiefierInfo id={info.id} because another ModiefierInfo allready uses this id!");
+                LavenderLog.Error($"Couldn't add ModifierInfo id={info.id} because another ModifierInfo allready uses this id!");
                 return;
             }
 

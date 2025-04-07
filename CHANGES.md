@@ -1,6 +1,16 @@
 # Upcoming
 
-# v0.3.0 ("March 30th 2025)
+# v0.4.0 (April 7th 2025)
+## Recipe
+- added ModifierInfo
+  - added AddModifierInfo()
+- added AddModifierToCraftingBase()
+
+## Patches
+- added CraftingBase.Start Prefix
+- added ModifierUI.UpdateModifierInfo Prefix
+
+# v0.3.0 (March 30th 2025)
 ## Furniture
 - fixed SavableScriptableObject.LoadFromPath being ambiguous in OS v0.4.05
 - reworked createdFurniture List as FurnitureDatabase

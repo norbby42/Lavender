@@ -12,7 +12,7 @@ namespace Lavender.RecipeLib
     {
         [HarmonyPatch(typeof(CraftingBase), nameof(CraftingBase.Start))]
         [HarmonyPrefix]
-        static bool CraftingBase_OnLoadingGame_Prefix(CraftingBase __instance)
+        static bool CraftingBase_Start_Prefix(CraftingBase __instance)
         {
             foreach(var item in Lavender.appliedCustomCraftingBaseModifiers)
             {
