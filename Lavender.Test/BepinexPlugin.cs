@@ -4,6 +4,7 @@ using Lavender.FurnitureLib;
 using Lavender.CommandLib;
 using System.Reflection;
 using System.IO;
+using System;
 
 namespace Lavender.Test
 {
@@ -38,6 +39,22 @@ namespace Lavender.Test
             //Storage test
             string storageSettingsPath = Path.Combine(Assembly.GetExecutingAssembly().Location.Substring(0, Assembly.GetExecutingAssembly().Location.Length - 17), "StorageSettings.json");
             Lavender.AddCustomStorageCategoryFromJson(storageSettingsPath, LCMPluginInfo.PLUGIN_NAME);
+
+
+            // Conversation patcher test
+            Random rand = new Random(); // Randomize which patch we apply first to confirm order of application doesn't change anything
+            if (rand.Next() % 2 == 0)
+            {
+                Lavender.AddConversationPatcher(new TestConversationPatcherTatyana());
+                Lavender.AddConversationPatcher(new TestConversationPatcherTatyana2());
+                Log.LogInfo($"Registered conversation patch tests; test menu first.");
+            }
+            else
+            {
+                Lavender.AddConversationPatcher(new TestConversationPatcherTatyana2());
+                Lavender.AddConversationPatcher(new TestConversationPatcherTatyana());
+                Log.LogInfo($"Registered conversation patch tests; rewritter first.");
+            }
 
             Log.LogInfo($"Plugin {LCMPluginInfo.PLUGIN_NAME} version {LCMPluginInfo.PLUGIN_VERSION} is loaded!");
         }

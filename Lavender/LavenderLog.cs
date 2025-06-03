@@ -32,6 +32,42 @@ namespace Lavender
             }
         }
 
+        public static void DialogueVerbose(string conversationName, string message)
+        {
+            if (BepinexPlugin.Settings.IsDialogueVerboseLoggingAllowed(conversationName))
+            {
+                if (BepinexPlugin.Settings.DetailedLog.Value)
+                {
+                    if (BepinexPlugin.Settings.UseBepinexLog.Value)
+                    {
+                        BepinexPlugin.Log.LogInfo($"[<color=#9585f1>Lavender</color>][Verbose] {message}");
+                    }
+                    else
+                    {
+                        Debug.Log($"[<color=#9585f1>Lavender</color>][Verbose] {message}");
+                    }
+                }
+            }
+        }
+
+        public static void DialogueVerboseNoConversation(string message)
+        {
+            if (BepinexPlugin.Settings.DialoguePatcherVerboseLogging.Value)
+            {
+                if (BepinexPlugin.Settings.DetailedLog.Value)
+                {
+                    if (BepinexPlugin.Settings.UseBepinexLog.Value)
+                    {
+                        BepinexPlugin.Log.LogInfo($"[<color=#9585f1>Lavender</color>][Verbose] {message}");
+                    }
+                    else
+                    {
+                        Debug.Log($"[<color=#9585f1>Lavender</color>][Verbose] {message}");
+                    }
+                }
+            }
+        }
+
         public static void Error(string message)
         {
             if (BepinexPlugin.Settings.UseBepinexLog.Value)
