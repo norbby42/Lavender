@@ -17,6 +17,7 @@ namespace Lavender
         {
             Log = Logger;
             Settings = new LavenderSettings(Config);
+            Settings.SetupCustomSettingsHandling();
 
             Lavender.furniturePrefabHandlers = new Dictionary<string, Lavender.FurniturePrefabHandler>();
             Lavender.furnitureShopRestockHandlers = new Dictionary<string, Lavender.FurnitureShopRestockHandler>();

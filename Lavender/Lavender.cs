@@ -11,6 +11,7 @@ using Lavender.RecipeLib;
 using FullSerializer;
 using Lavender.CommandLib;
 using Lavender.StorageLib;
+using Lavender.DialogueLib;
 
 namespace Lavender
 {
@@ -46,6 +47,7 @@ namespace Lavender
                 harmony.PatchAll(typeof(RecipePatches));
                 harmony.PatchAll(typeof(CommandManagerPatches));
                 harmony.PatchAll(typeof(StoragePatches));
+                harmony.PatchAll(typeof(DialogueInteractableTalkPatches));
             }
             catch (Exception e)
             {
@@ -366,6 +368,20 @@ namespace Lavender
             {
                 LavenderLog.Error($"Error while loading '{mod_name}'s StorageSpawnCategory Database!\nException: {e}");
             }
+        }
+
+        #endregion
+
+        #region DialogueLib
+
+        public static void AddConversationPatcher(ConversationPatcher patcher)
+        {
+            ConversationPatchesManager.Instance.AddConversationPatcher(patcher);
+        }
+
+        public IEnumerable<ConversationPatcher> GetPatchersForConversation(string conversationName)
+        {
+            return ConversationPatchesManager.Instance.GetPatchersForConversation(conversationName);
         }
 
         #endregion
