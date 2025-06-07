@@ -95,13 +95,7 @@ namespace Lavender.ItemLib
 
             try
             {
-                Mesh mesh = AssimpAPI.LoadSingleMeshOBJ(meshPath);
-                if(mesh == null)
-                {
-                    LavenderLog.Log("Assimp failed! Trying FastOBJImp instead...");
-                    mesh = FastObjImporter.Instance.ImportFile(meshPath);
-                }
-
+                Mesh mesh = FastObjImporter.Instance.ImportFile(meshPath);
                 mesh.name = name + "_Mesh";
                 meshFilter.mesh = mesh;
 

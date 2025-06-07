@@ -22,7 +22,6 @@ namespace Lavender.RuntimeImporter
 
         public static FastObjImporter Instance => FastObjImporter._instance ?? (FastObjImporter._instance = new FastObjImporter());
 
-        [Obsolete("This method is deprecated, try to use AssimpAPI instead!")]
         public Mesh ImportFile(string filePath)
         {
             this.triangles = new List<int>();

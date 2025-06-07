@@ -139,12 +139,7 @@ namespace Lavender.FurnitureLib
                             {
                                 if (!File.Exists(path + furnitureAssetData.objPath)) return null;
 
-                                Mesh? mesh = AssimpAPI.LoadSingleMeshOBJ(path + furnitureAssetData.objPath);
-                                if (mesh == null)
-                                {
-                                    LavenderLog.Log("Assimp failed! Trying FastOBJImp instead...");
-                                    mesh = FastObjImporter.Instance.ImportFile(path + furnitureAssetData.objPath);
-                                }
+                                Mesh? mesh = FastObjImporter.Instance.ImportFile(path + furnitureAssetData.objPath);
 
                                 mesh.name = furnitureData.title + "_Mesh";
                                 meshFilter.mesh = mesh;

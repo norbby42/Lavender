@@ -10,12 +10,6 @@
   - added DoResponsesIncludeNPC
 - added LinkOrdering
 
-## Runtime Importer
-- added AssimpAPI
-  - added ImportOBJ (Supports OBJs with multiple meshes)
-  - added LoadSingleMeshOBJ
-- deprecated FastOBJImporter (still usable)
-
 ## Patches
 - added InteractableTalk.OnDialogueStart Prefix
 - added InteractableTalk.OnDialogueEnded Prefix

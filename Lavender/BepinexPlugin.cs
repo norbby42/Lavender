@@ -1,7 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using Lavender.RecipeLib;
-using Lavender.RuntimeImporter;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,8 +15,6 @@ namespace Lavender
 
         private void Awake()
         {
-            AssimpAPI.Innit();
-
             Log = Logger;
             Settings = new LavenderSettings(Config);
             Settings.SetupCustomSettingsHandling();
