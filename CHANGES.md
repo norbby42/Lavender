@@ -1,5 +1,5 @@
 # Upcoming
-# v0.5.0 (June 7th 2025) - Pre-Release
+# v0.5.0 (June 7th 2025)
 ## DialogueLib 
 - added ConversationPatcher
 - added ConversationPatchesManager
