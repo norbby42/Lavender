@@ -1,4 +1,28 @@
 # Upcoming
+# v0.5.0 (June 7th 2025) - Pre-Release
+## DialogueLib 
+- added ConversationPatcher
+- added ConversationPatchesManager
+- added ConversationUtils
+  - added GetResponsesTo
+  - added GetStaticResponsesTo
+  - added AdvanceToRespondable
+  - added DoResponsesIncludeNPC
+- added LinkOrdering
+
+## Runtime Importer
+- added AssimpAPI
+  - added ImportOBJ (Supports OBJs with multiple meshes)
+  - added LoadSingleMeshOBJ
+- deprecated FastOBJImporter (still usable)
+
+## Patches
+- added InteractableTalk.OnDialogueStart Prefix
+- added InteractableTalk.OnDialogueEnded Prefix
+
+## Settings
+- added DialoguePatcherVerboseLogging
+- added EnabledVerboseConversations
 
 # v0.4.0 (April 7th 2025)
 ## Recipe
