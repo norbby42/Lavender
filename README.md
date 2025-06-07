@@ -11,22 +11,20 @@
 
 **Lavender** is a powerful and user-friendly library mod designed to simplify the process of modding the game [Obenseuer](https://store.steampowered.com/app/951240/Obenseuer/) using BepInEx as mod loader.
 ## Nuget
-- **.Net CLI:** ``dotnet add package Lavender --version 0.3.0``
-- **PackageReference:** ``<PackageReference Include="Lavender" Version="0.3.0" />``
+- **.Net CLI:** ``dotnet add package Lavender --version 0.5.0``
+- **PackageReference:** ``<PackageReference Include="Lavender" Version="0.5.0" />``
+
+## Documentation
+Looking for help or want to learn more? Check out the full documentation and step-by-step guides at [Lavender-Docs](https://leonarudo.github.io/Lavender-Docs/).
 
 ## Features:
 - Furniture
-  - Assets either via AssetBundles or OBJ & JPG/PNG
-  - Custom Scripts
-  - add to Shops
 - Storages
-- Item
-  - Assets either via AssetBundles or OBJ & JPG/PNG
-  - Just like the native Items.json
-- Recipe
-  - Just like the native Recipe.json
+- Items
+- Recipes
 - Developer Console
-  - Simply add new Console Commands
+- Dialogue Patching
+
 ### Additional:
 - Runtime OBJ Importer
 - easy PNG/JPG Loader
@@ -40,6 +38,10 @@ Contributions are welcome! Whether you're fixing bugs, adding new features, or i
 Here are some basic resources on code style and naming conventions Lavender trys to fulfill:
 - [Coding Conventions](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions)
 - [Identifier Names](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/identifier-names)
+
+## Maintainers
+Lavender is mainly maintained by [leonarudo](https://github.com/leonarudo), who manages the overall development and direction. <br>
+The DialogueLib module is specifically maintained by [norbby42](https://github.com/norbby42).
 
 ## License
 This project is licensed under the [LGPL-v2.1 license](LICENSE)
