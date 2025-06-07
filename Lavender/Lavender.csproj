@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <Version>0.4.0</Version>
+    <Version>0.5.0</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/leonarudo/Lavender</RepositoryUrl>
     <Description>Lavender is a powerful and user-friendly library mod designed to simplify the process of modding the game Obenseuer using BepInEx as mod loader.</Description>
@@ -29,6 +29,7 @@
 
 		<ItemGroup>
 				<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+				<PackageReference Include="Silk.NET.Assimp" Version="2.22.0" />
 				<PackageReference Include="UnityEngine.Modules" Version="2019.4.40">
 						<IncludeAssets>all</IncludeAssets>
 						<PrivateAssets>all</PrivateAssets>
