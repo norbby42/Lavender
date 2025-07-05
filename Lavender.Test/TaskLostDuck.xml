@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<task>
+  <id>lostduck</id>
+  <title>A lost duck</title>
+  <description>A lost duckling waddled ashore and was discovered sleeping near your tenement's dock.  It is very friendly, as though it is used to human contact.  It also is shivering and hungry.</description>
+  <finishTaskWhenTheresNoActiveTasks>true</finishTaskWhenTheresNoActiveTasks>
+  <requiredActivateTasks>
+    <taskstatusinfo>
+      <id>surviving</id>
+      <status>anystatus</status>
+      <objectives>
+        <objectivestatusinfo>talktolady</objectivestatusinfo>
+      </objectives>
+    </taskstatusinfo>
+  </requiredActivateTasks>
+  <firstObjectives>
+    <objectivereference optional="false">findmrduck</objectivereference>
+  </firstObjectives>
+
+  <objective>
+    <id>findmrduck</id>
+    <title>Find someone who knows more</title>
+    <description>Surely someone in this absurd area can help.  Maybe someone obsessed with the fowl?  Maybe already a little drunk?</description>
+    <counterAmount>0</counterAmount>
+    <onFinishedObjectives>
+      <objectivereference optional="false">talktoyellowmrduck</objectivereference>
+    </onFinishedObjectives>
+  </objective>
+
+  <objective>
+    <id>talktoeija</id>
+    <title>Duck burgers?!?</title>
+    <description>Eija spotted your duckling and seemed very interested in it.  She laid on some harsh hints that should you leave the duckling with her, nothing good would come of it.</description>
+    <requiredActivateObjectives>
+      <objectivestatusinfo status="active">talktoyellowmrduck</objectivestatusinfo>
+    </requiredActivateObjectives>
+    <requiredCompleteObjectives>
+      <objectivestatusinfo status="finished">findmrduck</objectivestatusinfo>
+    </requiredCompleteObjectives>
+  </objective>
+
+  <objective>
+    <id>talktoyellowmrduck</id>
+    <title>Blue duck can't help, maybe yellow duck can?</title>
+    <description>Blue duck accurately assessed his ability to care for an actual breathing duck as 0.  It was suggested that you talk to Yellow Duck and see if he is any more capable.</description>
+    <onFinishedObjectives>
+      <objectivereference>releaseduckling</objectivereference>
+    </onFinishedObjectives>
+  </objective>
+
+  <objective>
+    <id>releaseduckling</id>
+    <title>Yellow duck can care for the duckling</title>
+    <description>The sight of a living breathing duckling fixed something broken in Mr Duck.  Who knew he actually looked like that?  What a shame he likes to wear the mask.  Give Mr Yellow Duck the duckling.</description>
+    <onAbandonedObjectives>
+      <objectivereference>tellyellowduckbadnews</objectivereference>
+    </onAbandonedObjectives>
+    <onFailedObjectives>
+      <objectivereference>tellyellowduckbadnews</objectivereference>
+    </onFailedObjectives>
+  </objective>
+
+  <objective>
+    <id>tellyellowduckbadnews</id>
+    <title>You monster.  Time to face the music.</title>
+    <description>Tell Mr Yellow Duck the bad news.  If you're lucky his sanity might be enough to prevent him from using that axe of his.</description>
+  </objective>
+</task>

@@ -43,6 +43,12 @@
 				<Reference Include="$(DependsDir)/Assembly-CSharp-firstpass.dll" Publicize="true" />
 				<Reference Include="$(DependsDir)/UnityEngine.UI.dll" Publicize="true" />
 				<Reference Include="$(DependsDir)/UnityEngine.PhysicsModule.dll" Publicize="true" />
+				<Reference Include="Unity.Addressables">
+				  <HintPath>..\..\..\Steam\steamapps\common\Obenseuer\Obenseuer_Data\Managed\Unity.Addressables.dll</HintPath>
+				</Reference>
+				<Reference Include="Unity.ResourceManager">
+				  <HintPath>..\..\..\Steam\steamapps\common\Obenseuer\Obenseuer_Data\Managed\Unity.ResourceManager.dll</HintPath>
+				</Reference>
 		</ItemGroup>
 
 		<ItemGroup>
