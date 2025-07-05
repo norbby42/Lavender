@@ -149,6 +149,7 @@ namespace Lavender.DialogueLib
             {
                 FlagMakerAsOnlyPatcher(patcher);
             }
+            DeferredDemotedMakers.Clear();
         }
 
         // When a ConversationMaker discovers that it is trying to act on a conversation that already exists, it calls back to us so we can update its registration
