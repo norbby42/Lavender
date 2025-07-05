@@ -18,7 +18,7 @@ namespace Lavender.DialogueLib
     {
         private PixelCrushers.DialogueSystem.Conversation _Conversation;
         private string _ConversationName;
-        private bool RanPatch = false;
+        protected bool RanPatch { get; private set; } = false;
 
         /// <summary>
         /// The Conversation that we patch
@@ -286,7 +286,7 @@ namespace Lavender.DialogueLib
         #region Internal glue
         // Wrapper for PatchDialogue.  Do not override this function, as it contains safeguards to prevent double-patching and performs necessary state initialization
         // You don't ever need to call this function - Lavender handles that for you.
-        internal void TryPatchDialogue()
+        internal virtual void TryPatchDialogue()
         {
             if (RanPatch || SaveController.Loading)
             {
