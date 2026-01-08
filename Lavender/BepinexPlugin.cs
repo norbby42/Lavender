@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using Lavender.RecipeLib;
+using Lavender.RuntimeImporter;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,7 +20,10 @@ namespace Lavender
             Settings = new LavenderSettings(Config);
             Settings.SetupCustomSettingsHandling();
 
+            Lavender.lavenderAssets = new List<LavenderAssetBundle>();
+
             Lavender.furniturePrefabHandlers = new Dictionary<string, Lavender.FurniturePrefabHandler>();
+            Lavender.ingameFurniturePrefabHandlers = new Dictionary<string, Lavender.FurniturePrefabHandler>();
             Lavender.furnitureShopRestockHandlers = new Dictionary<string, Lavender.FurnitureShopRestockHandler>();
             Lavender.FurnitureDatabase = new List<Furniture>();
 
