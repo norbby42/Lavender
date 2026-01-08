@@ -30,22 +30,31 @@ namespace Lavender.FurnitureLib
         public int priceRM;
 
         /// <summary>
-        /// The location of the AssetBundle, which contains the image,prefab and preview prefab, relative to the .json path
-        /// <br>Or the location of the FurnitureAssetData .json</br>
+        /// ?
         /// </summary>
-        public string assetBundlePath;
+        public bool trash;
+
         /// <summary>
-        /// The name of the sprite in the AssetBundle defined at assetBundlePath
+        /// LavenderAsset-ID 'ModName-id' e.g. Lavender-100
         /// </summary>
         public string imageName;
         /// <summary>
-        /// The name of the GameObject/Prefab in the AssetBundle defined at assetBundlePath
+        /// LavenderAsset-ID 'ModName-id' e.g. Lavender-100
         /// </summary>
         public string prefabName;
         /// <summary>
-        /// The name of the GameObject/Prefab in the AssetBundle defined at assetBundlePath
+        /// LavenderAsset-ID 'ModName-id' e.g. Lavender-100
         /// </summary>
         public string previewPrefabName;
+
+        /*
+         * To do:
+         * 
+
+        /// <summary>
+        /// LavenderAsset-ID 'ModName-id' e.g. Lavender-100
+        /// </summary>
+        public string customDisplayPrefab; */
 
         /// <summary>
         /// The category of the Furniture
@@ -105,7 +114,8 @@ namespace Lavender.FurnitureLib
         Flags,
         LicensePlates,
         Kitchen,
-        Tank
+        Tank,
+        None
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
@@ -124,7 +134,10 @@ namespace Lavender.FurnitureLib
         PlayerApartment,
         Workshop,
         Outside,
-        Greenhouse
+        Greenhouse,
+        Store,
+        Communal,
+        Public
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
