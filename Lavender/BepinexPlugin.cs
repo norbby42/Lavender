@@ -1,7 +1,10 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
+using Lavender.DataOnlyModLib;
 using Lavender.RecipeLib;
 using Lavender.RuntimeImporter;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +16,7 @@ namespace Lavender
     {
         internal static ManualLogSource Log = null!;
         internal static LavenderSettings Settings = null!;
+        public static readonly Version LavenderVersion = new Version(LCMPluginInfo.PLUGIN_VERSION);
 
         private void Awake()
         {
@@ -33,10 +37,14 @@ namespace Lavender
             Lavender.appliedCustomCraftingBaseModifiers = new Dictionary<string, int>();
             Lavender.customRecipeDatabase = new List<Recipe>();
 
+            Lavender.OnStorageEnterCallbacks = new Dictionary<string, Lavender.OnStorageEnter>();
+            Lavender.OnStorageExitCallbacks = new Dictionary<string, Lavender.OnStorageExit>();
             Lavender.customStorageCategoryDatabase = new List<StorageCategory>();
             Lavender.customStorageSpawnCategoryDatabase = new List<StorageSpawnCategory>();
 
             new Lavender();
+
+            DataOnlyModManager.Run();
 
             SceneManager.sceneUnloaded += OnSceneUnloaded;
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -68,6 +76,11 @@ namespace Lavender
 
             Lavender.instance.lastLoadedScene = scene.buildIndex;
             Lavender.instance.LoadingDone = false;
+
+            if(scene.buildIndex == 0)
+            {
+                StartCoroutine(GitHubVersionChecker.CheckLatestVersionCoroutine());
+            }
         }
 
         private void onLoadingDone()
